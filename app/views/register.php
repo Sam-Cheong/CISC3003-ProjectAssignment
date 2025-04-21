@@ -1,4 +1,8 @@
 <?php
     $webTitle = "Register";
-    include_once "./layouts/header.php";
+    include("./layouts/header.php");
+?>
+
+<?php 
+    include(".//layouts/footer.php");
 ?>
