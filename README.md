@@ -21,7 +21,7 @@ To use the system, you need to pay attention to the instructions below:
     - Start the Apache Server and MySQL Server
     - Open schema.sql in the root of directory
     - Visit the [MySQL Database Management Dashboard](http://localhost/phpmyadmin/)
-    - Create new database on the left side bar called course_enrollment
+    - Create new database on the left side bar, the database name is same with DB_NAME in .env
     - Copy all the SQL statements in schema.sql and paste to the SQL options on the navigate bar on the top
     - Execute the SQL statements
     - Finally, Start using the system from http://localhost/NAME_OF_DIRECTORY
