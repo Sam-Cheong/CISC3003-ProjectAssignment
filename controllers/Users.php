@@ -7,10 +7,12 @@ require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../helpers/Mailer.php';
 require_once __DIR__ . '/../helpers/session_helper.php';
 
-class Users {
+class Users
+{
     private $userModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->userModel = new User;
     }
 
@@ -22,14 +24,15 @@ class Users {
      *   - generate & send verification code
      *   - store temp data + code in session
      */
-    public function register() {
+    public function register()
+    {
         $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
 
         $data = [
             'username' => trim($_POST['username'] ?? ''),
             'email'    => trim($_POST['email']    ?? ''),
             'password' => trim($_POST['password'] ?? ''),
-            'repeatPwd'=> trim($_POST['repeatPwd']?? '')
+            'repeatPwd' => trim($_POST['repeatPwd'] ?? '')
         ];
 
         // 1. Basic validation
@@ -70,7 +73,8 @@ class Users {
         $_SESSION['temp_user'] = [
             'username' => $data['username'],
             'email'    => $data['email'],
-            'password' => $hashed
+            'password' => $hashed,
+            'roleID'   => 3
         ];
         $_SESSION['email_verification'] = [
             'email' => $data['email'],
@@ -93,7 +97,8 @@ class Users {
      *   - check code + expiry
      *   - on success, create the real user
      */
-    public function verify() {
+    public function verify()
+    {
         $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
 
         $enteredCode = intval($_POST['code'] ?? 0);
@@ -108,8 +113,10 @@ class Users {
         $this->userModel->register([
             'username' => $temp['username'],
             'email'    => $temp['email'],
-            'password' => $temp['password']
+            'password' => $temp['password'],
+            'roleID'   => $temp['roleID']
         ]);
+
 
         // Cleanup session
         unset($_SESSION['temp_user'], $_SESSION['email_verification']);
@@ -121,44 +128,124 @@ class Users {
     /**
      * Existing login flow (unchanged)
      */
-    public function login() {
+    public function login()
+    {
         $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+        $login    = trim($_POST['username'] ?? '');
+        $password = trim($_POST['password'] ?? '');
 
-        $data = [
-            'username' => trim($_POST['username'] ?? ''),
-            'password' => trim($_POST['password'] ?? '')
-        ];
-
-        if (in_array('', $data, true)) {
-            flash("login", "Please fill out all fields.");
-            redirect("../views/login.php");
+        // 1) Check both fields
+        if ($login === '' || $password === '') {
+            flash('login', 'Please fill out all fields.');
+            redirect('../views/login.php');
         }
 
-        if ($this->userModel->findUserByEmailOrUsername($data['username'], $data['username'])) {
-            $user = $this->userModel->login($data['username'], $data['password']);
-            if ($user) {
-                $this->createUserSession($user);
-            } else {
-                flash("login", "Password incorrect.");
-                redirect("../views/login.php");
-            }
+        // 2) Attempt login by either username or email
+        $user = $this->userModel->login($login, $password);
+
+        if ($user) {
+            // 3) Success
+            $this->createUserSession($user);
         } else {
-            flash("login", "No user found with that email or username.");
-            redirect("../views/login.php");
+            // 4) Failure
+            flash('login', 'Invalid username/email or password.');
+            redirect('../views/login.php');
         }
     }
 
-    public function createUserSession($user) {
+    public function createUserSession($user)
+    {
         $_SESSION['userID']   = $user->userID;
         $_SESSION['email']    = $user->email;
         $_SESSION['username'] = $user->username;
         redirect("../index.php");
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_unset();
         session_destroy();
         redirect("../index.php");
+    }
+
+    /**
+     * Step A: Handle “Forgot Password” form submission.
+     */
+    public function forgot()
+    {
+        $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+        $email = trim($_POST['email'] ?? '');
+
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            flash('forgot', 'Please enter a valid email.');
+            redirect('../views/forgot.php');
+        }
+
+        // Does user exist?
+        $user = $this->userModel->findUserByEmailOrUsername($email, $email);
+        if (!$user) {
+            flash('forgot', 'No account found with that email.');
+            redirect('../views/forgot.php');
+        }
+
+        // Generate token + expiry
+        $token   = bin2hex(random_bytes(16));
+        $expires = date('Y-m-d H:i:s', time() + 3600);  // 1 hour
+
+        // Store in DB
+        $this->userModel->createPasswordReset($user->userID, $token, $expires);
+
+        // Send reset email
+        // $appUrl = rtrim($_ENV['APP_URL'] ?? '/');
+        $link   = "http://localhost/CISC3003-ProjectAssignment/views/resetPwd.php?token={$token}";
+
+        if (!Mailer::sendPasswordReset($email, $link)) {
+            flash('forgot', 'Unable to send reset email. Try again later.');
+            redirect('../views/forgot.php');
+        }
+
+        flash('forgot', 'A reset link has been sent to your email.');
+        redirect('../views/login.php');
+    }
+
+    /**
+     * Step B: Handle “Reset Password” form submission.
+     */
+    public function reset()
+    {
+        $_POST      = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+        $token      = $_POST['token'] ?? '';
+        $password   = trim($_POST['password']   ?? '');
+        $confirmPwd = trim($_POST['confirmPwd'] ?? '');
+
+        if (!$token || empty($password) || empty($confirmPwd)) {
+            flash('reset', 'Please fill out all fields.');
+            redirect("../views/reset.php?token={$token}");
+        }
+        if ($password !== $confirmPwd) {
+            flash('reset', 'Passwords do not match.');
+            redirect("../views/reset.php?token={$token}");
+        }
+
+        // Lookup the reset record
+        $reset = $this->userModel->getPasswordResetByToken($token);
+        if (!$reset || $reset->expiresAt < date('Y-m-d H:i:s')) {
+            flash('reset', 'Invalid or expired token.');
+            redirect('../views/forgot.php');
+        }
+
+        // Update the user’s password
+        $newHash = password_hash($password, PASSWORD_DEFAULT);
+        if ($this->userModel->resetPassword($newHash, $reset->userEmail)) {
+            // Clean up
+            $this->userModel->deletePasswordReset($token);
+
+            flash('login', 'Your password has been reset. Please log in.');
+            redirect('../views/login.php');
+        } else {
+            flash('reset', 'Failed to reset password. Try again.');
+            redirect("../views/reset.php?token={$token}");
+        }
     }
 }
 
@@ -176,13 +263,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'login':
             $init->login();
             break;
+        case 'forgot':
+            $init->forgot();
+            break;
+        case 'reset':
+            $init->reset();
+            break;
         default:
-            redirect("../index.php");
+            redirect('../index.php');
     }
 } else {
     if (($_GET['q'] ?? '') === 'logout') {
         $init->logout();
     } else {
-        redirect("../index.php");
+        redirect('../index.php');
     }
 }

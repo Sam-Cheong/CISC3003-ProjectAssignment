@@ -17,7 +17,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
 
         <?php flash('login'); ?>
 
-        <form action="/controllers/Users.php" method="post">
+        <form action="../controllers/Users.php" method="post">
             <!-- Tell controller this is a login -->
             <input type="hidden" name="type" value="login">
 
@@ -40,12 +40,16 @@ require_once __DIR__ . '/../helpers/session_helper.php';
                     required>
             </div>
 
+            <p class="alt-action">
+                <a href="./forgotPwd.php">Forgot your password?</a>
+            </p>
+
             <button type="submit">Log In</button>
         </form>
 
         <p class="alt-action">
             Don’t have an account?
-            <a href="/views/register.php">Register now</a>
+            <a href="./register.php">Register now</a>
         </p>
     </div>
 </body>
