@@ -8,8 +8,8 @@ require_once __DIR__ . '/../helpers/session_helper.php';
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <!-- CSS is served from public/css/style.css -->
-    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="../public/css/style.css">
 </head>
 
 <body>
@@ -18,8 +18,8 @@ require_once __DIR__ . '/../helpers/session_helper.php';
 
         <?php flash('register'); ?>
 
-        <form action="/controllers/Users.php" method="post">
-            <!-- Tell controller this is a registration -->
+        <form action="../controllers/Users.php" method="post">
+
             <input type="hidden" name="type" value="register">
 
             <div class="form-group">
@@ -28,7 +28,6 @@ require_once __DIR__ . '/../helpers/session_helper.php';
                     type="text"
                     id="username"
                     name="username"
-                    required
                     value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
             </div>
 
@@ -38,7 +37,6 @@ require_once __DIR__ . '/../helpers/session_helper.php';
                     type="email"
                     id="email"
                     name="email"
-                    required
                     value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
             </div>
 
@@ -48,7 +46,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
                     type="password"
                     id="password"
                     name="password"
-                    required>
+                    >
             </div>
 
             <div class="form-group">
@@ -57,7 +55,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
                     type="password"
                     id="repeatPwd"
                     name="repeatPwd"
-                    required>
+                    >
             </div>
 
             <button type="submit">Register</button>
@@ -65,9 +63,10 @@ require_once __DIR__ . '/../helpers/session_helper.php';
 
         <p class="alt-action">
             Already have an account?
-            <a href="/views/login.php">Log in here</a>
+            <a href="./login.php">Log in here</a>
         </p>
     </div>
+    <script src="../public/js/flash.js"></script>
 </body>
 
 </html>
