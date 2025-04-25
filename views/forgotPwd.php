@@ -22,12 +22,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
 
             <div class="form-group">
                 <label for="email">Enter your email</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+                <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
             </div>
 
             <button type="submit">Send Reset Link</button>

@@ -44,7 +44,7 @@ $token = $_GET['token'] ?? '';
         </form>
 
         <p class="alt-action">
-            Didn’t request this? <a href="./login.php">Back to login</a>
+            Didn't request this? <a href="./login.php">Back to login</a>
         </p>
     </div>
     <script src="../public/js/flash.js"></script>

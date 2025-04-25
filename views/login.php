@@ -31,7 +31,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
             <p class="alt-action"><a href="./forgotPwd.php">Forgot your password?</a></p>
             <button type="submit">Log In</button>
         </form>
-        <p class="alt-action">Don’t have an account? <a href="./register.php">Register now</a></p>
+        <p class="alt-action">Don't have an account? <a href="./register.php">Register now</a></p>
     </div>
     <script src="../public/js/flash.js"></script>
 </body>

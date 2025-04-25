@@ -13,26 +13,30 @@ require_once __DIR__ . '/helpers/session_helper.php';
 </head>
 
 <body>
-    <div class="form-container">
-        <?php flash('login_success'); ?>
+    <header>
+        <span class="logo"><a href="/"><img src="" alt=""></a></span>
+        <ul class="nav-links">
+            <li><a href="" class="nav-link">Home</a></li>
+            <li><a href="" class="nav-link"></a></li>
+            <li><a href="" class="nav-link"></a></li>
+            <li><a href="" class="nav-link"></a></li>
+            <li><a href="" class="nav-link"></a></li>
+        </ul>
+        <div class="nav-search">
+            <input type="text" name="nav-course-search" id="nav-course-search">
+        </div>
+        <div class="nav-btns">
+            <a href="" class="nav-btn">Sign Up</a>
+        </div>
+    </header>
+    <main>
+        <section id="hero">
 
-        <?php if (isset($_SESSION['userID'])): ?>
-            <h2>Welcome, <?= htmlspecialchars($_SESSION['username']) ?>!</h2>
+        </section>
+        <section>
 
-            <!-- Logout form -->
-            <form action="./controllers/Users.php" method="get" style="margin-top: 20px;">
-                <input type="hidden" name="q" value="logout">
-                <button type="submit">Logout</button>
-            </form>
-        <?php else: ?>
-            <h2>Please log in or register</h2>
-            <p class="alt-action">
-                <a href="./views/login.php">Log in</a>
-                <br>
-                <a href="./views/register.php">Register</a>
-            </p>
-        <?php endif; ?>
-    </div>
+        </section>
+    </main>
 </body>
 
 </html>
