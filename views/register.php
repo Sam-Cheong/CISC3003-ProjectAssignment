@@ -14,8 +14,13 @@ if (isset($_SESSION['userID'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+=======
+
+    <link rel="stylesheet" href="../public/css/style.css">
+>>>>>>> 584fc42eda2ff353330a5e1de8a3c588107e54f0
 </head>
 
 <body>

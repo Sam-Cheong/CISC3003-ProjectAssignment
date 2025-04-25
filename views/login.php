@@ -18,6 +18,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
 
     <?php include __DIR__ . '/layouts/header.php'; ?>
 
+<<<<<<< HEAD
     <main id="login">
         <div class="form-container">
             <h1>Login</h1>
@@ -58,6 +59,24 @@ require_once __DIR__ . '/../helpers/session_helper.php';
             }
         })
     </script>
+=======
+        <form action="../controllers/Users.php" method="post">
+            <input type="hidden" name="type" value="login">
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="text" id="email" name="email" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <p class="alt-action"><a href="./forgotPwd.php">Forgot your password?</a></p>
+            <button type="submit">Log In</button>
+        </form>
+        <p class="alt-action">Don't have an account? <a href="./register.php">Register now</a></p>
+    </div>
+    <script src="../public/js/flash.js"></script>
+>>>>>>> 584fc42eda2ff353330a5e1de8a3c588107e54f0
 </body>
 
 </html>

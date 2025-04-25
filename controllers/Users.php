@@ -113,7 +113,11 @@ class Users
     public function login()
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+<<<<<<< HEAD
         $login    = trim($_POST['username-email'] ?? '');
+=======
+        $login    = trim($_POST['email'] ?? '');
+>>>>>>> 584fc42eda2ff353330a5e1de8a3c588107e54f0
         $password = trim($_POST['password'] ?? '');
 
         if ($login === '' || $password === '') {
