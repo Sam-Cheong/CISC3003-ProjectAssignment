@@ -4,10 +4,6 @@
 *.tmp
 *.swp
 
-# === Composer 相關 ===
-/vendor/
-composer.lock
-
 # === 環境設定檔（不應提交至 Git） ===
 .env
 .env.local

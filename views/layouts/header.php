@@ -15,7 +15,6 @@
         <li><a href="/CISC3003-ProjectAssignment/views/courses.php" class="nav-link">Courses</a></li>
         <li><a href="/CISC3003-ProjectAssignment/views/about.php" class="nav-link">About</a></li>
         <?php if (isset($_SESSION['userID'])): ?>
-            <li><a href="/CISC3003-ProjectAssignment/views/dashboard.php" class="nav-link">Dashboard</a></li>
             <li><a href="/CISC3003-ProjectAssignment/views/profile.php" class="nav-link">Profile</a></li>
             <li><a href="/CISC3003-ProjectAssignment/controllers/Users.php?q=logout" class="nav-btn">Logout</a></li>
         <?php else: ?>
