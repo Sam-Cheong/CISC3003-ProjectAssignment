@@ -8,30 +8,18 @@ require_once __DIR__ . '/helpers/session_helper.php';
 
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <title>CISC3003 | Home </title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="./public/css/style.css">
 </head>
 
 <body>
-    <header>
-        <span class="logo"><a href="/"><img src="" alt=""></a></span>
-        <ul class="nav-links">
-            <li><a href="" class="nav-link">Home</a></li>
-            <li><a href="" class="nav-link"></a></li>
-            <li><a href="" class="nav-link"></a></li>
-            <li><a href="" class="nav-link"></a></li>
-            <li><a href="" class="nav-link"></a></li>
-        </ul>
-        <div class="nav-search">
-            <input type="text" name="nav-course-search" id="nav-course-search">
-        </div>
-        <div class="nav-btns">
-            <a href="" class="nav-btn">Sign Up</a>
-        </div>
-    </header>
+
+    <?php require_once './views/layouts/header.php' ?>
+
     <main>
         <section id="hero">
-
+            <h1></h1>
         </section>
         <section>
 

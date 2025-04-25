@@ -33,9 +33,9 @@ function flash(string $name = '', string $message = '', string $class = 'form-me
     // Display & clear message
     else if (empty($message) && !empty($_SESSION[$name])) {
         $msgClass = $_SESSION[$name . '_class'] ?? $class;
-        echo '<div class="' . htmlspecialchars($msgClass) . '">' 
-             . htmlspecialchars($_SESSION[$name]) 
-             . '</div>';
+        echo '<div class="' . htmlspecialchars($msgClass) . '">'
+            . htmlspecialchars($_SESSION[$name])
+            . '</div>';
         unset($_SESSION[$name], $_SESSION[$name . '_class']);
     }
 }

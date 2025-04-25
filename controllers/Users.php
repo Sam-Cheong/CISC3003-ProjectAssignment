@@ -32,23 +32,22 @@ class Users
         // 1. Validation
         if (in_array('', $data, true)) {
             flash('register', 'Please fill out all fields.', 'form-message form-message-red');
-            redirect('../views/register.php');
         }
+
         if (!preg_match('/^[a-zA-Z0-9]+$/', $data['username'])) {
             flash('register', 'Invalid username.', 'form-message form-message-red');
-            redirect('../views/register.php');
         }
+
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             flash('register', 'Invalid email address.', 'form-message form-message-red');
-            redirect('../views/register.php');
         }
-        if (strlen($data['password']) < 6) {
-            flash('register', 'Password must be at least 6 characters.', 'form-message form-message-red');
-            redirect('../views/register.php');
+
+        if (strlen($data['password']) < 8) {
+            flash('register', 'Password must be at least 8 characters.', 'form-message form-message-red');
         }
+
         if ($data['password'] !== $data['repeatPwd']) {
             flash('register', 'Passwords do not match.', 'form-message form-message-red');
-            redirect('../views/register.php');
         }
 
         // 2. Uniqueness
@@ -114,7 +113,7 @@ class Users
     public function login()
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
-        $login    = trim($_POST['email'] ?? '');
+        $login    = trim($_POST['username-email'] ?? '');
         $password = trim($_POST['password'] ?? '');
 
         if ($login === '' || $password === '') {
@@ -139,7 +138,7 @@ class Users
         $_SESSION['userID']   = $user->userID;
         $_SESSION['email']    = $user->userEmail;   // from users.userEmail column
         $_SESSION['username'] = $user->userName;    // from users.userName column
-        redirect('../index.php');
+        redirect('../views/login.php');
     }
 
     public function logout()
@@ -180,7 +179,7 @@ class Users
             redirect('../views/forgot.php');
         }
 
-        flash('forgot', 'A reset link has been sent to your email', 'form-message form-message-green');
+        flash('login', 'A reset link has been sent to your email', 'form-message form-message-orange');
         redirect('../views/login.php');
     }
 
