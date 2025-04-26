@@ -50,7 +50,7 @@ desktop.ini
 /.phpunit.result.cache
 
 # === 其他可選項目（如 DB dump）===
-*.sql
+# *.sql
 *.sqlite
 *.bak
 *.old

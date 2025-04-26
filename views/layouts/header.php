@@ -25,5 +25,5 @@
     <div class="nav-btns">
         <a href="/CISC3003-ProjectAssignment/views/register.php" class="nav-btn">Sign Up</a>
     </div>
-    <?php endif ?>
+    <?php endif; ?>
 </header>
