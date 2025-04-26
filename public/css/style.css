@@ -144,7 +144,8 @@ main {
 #login,
 #register,
 #forgot-pwd,
-#reset-pwd {
+#reset-pwd,
+#verify {
     display: flex;
     align-items: center;
     justify-content: center;
