@@ -211,7 +211,7 @@ class Users
         $newHash = password_hash($password, PASSWORD_DEFAULT);
         if ($this->userModel->resetPassword($newHash, $reset->userEmail)) {
             $this->userModel->deletePasswordReset($token);
-            flash('login', 'Your password has been reset. Please log in.', 'form-message form-message-green');
+            flash('login', 'Your password has been reset. Please log in.', 'form-message form-message-orange');
             redirect('../views/login.php');
         } else {
             flash('reset', 'Failed to reset password. Try again.', 'form-message form-message-red');
