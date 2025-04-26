@@ -28,7 +28,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
                 <button class="form-btn" type="submit">Verify</button>
                 <p class="alt-action">
                     Didn't receive a code?
-                    <a href="/views/register.php">Restart registration</a>
+                    <a href="/CISC3003-ProjectAssignment/views/register.php">Restart registration</a>
                 </p>
             </form>
         </div>
