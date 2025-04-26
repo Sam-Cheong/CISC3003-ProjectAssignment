@@ -8,7 +8,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
 <head>
     <meta charset="UTF-8">
     <title>Verify Email</title>
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/style.css">
 </head>
 
 <body>
@@ -16,6 +16,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
         <div class="form-container">
             <h2>Email Verification</h2>
             <p>Please enter the 6 digit code we sent to your email.</p>
+            <br>
             <form action="../controllers/Users.php" method="post">
                 <?php flash('verify'); ?>
                 <?php flash('info'); ?>
@@ -25,11 +26,11 @@ require_once __DIR__ . '/../helpers/session_helper.php';
                     <label class="form-label" for="code">Verification Code</label>
                 </div>
                 <button class="form-btn" type="submit">Verify</button>
+                <p class="alt-action">
+                    Didn't receive a code?
+                    <a href="/views/register.php">Restart registration</a>
+                </p>
             </form>
-            <p class="alt-action">
-                Didn't receive a code?
-                <a href="/views/register.php">Restart registration</a>
-            </p>
         </div>
     </main>
 </body>
