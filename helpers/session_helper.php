@@ -50,3 +50,8 @@ function redirect(string $location): void
     header('Location: ' . $location);
     exit();
 }
+
+// helpers/session_helper.php
+function isLoggedIn() {
+    return isset($_SESSION['userID']);
+}

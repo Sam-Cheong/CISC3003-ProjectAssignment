@@ -301,3 +301,44 @@ main {
     margin-top: 4px;
     font-size: 0.9rem;
 }
+
+
+.course-list {
+    max-width: 1200px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 0 20px;
+}
+
+.course-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+.course-code {
+    color: #2973B2;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.course-teacher {
+    color: #666;
+    font-size: 0.95em;
+    margin: 10px 0;
+}
+
+.course-schedule {
+    background: #f2f4f7;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.9em;
+}
