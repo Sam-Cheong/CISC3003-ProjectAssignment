@@ -1,20 +1,36 @@
--- 建立 users 表
-CREATE TABLE IF NOT EXISTS users (
-    userID INT AUTO_INCREMENT PRIMARY KEY,
-    userName VARCHAR(50) NOT NULL,
-    userEmail VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    roleID INT NOT NULL DEFAULT 3,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- 先創建 roles 表 (若不存在)
+CREATE TABLE IF NOT EXISTS roles (
+  roleID INT PRIMARY KEY AUTO_INCREMENT,
+  roleName VARCHAR(50) NOT NULL UNIQUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 建立 password_resets 表
-CREATE TABLE IF NOT EXISTS password_resets (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    userID INT NOT NULL,
-    userEmail VARCHAR(100) NOT NULL,
-    token VARCHAR(64) NOT NULL,
-    expiresAt DATETIME NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE
-);
+-- 修正後的 users 表
+CREATE TABLE users (
+  userID     INT            PRIMARY KEY AUTO_INCREMENT,
+  userName   VARCHAR(255)   NOT NULL,
+  userEmail  VARCHAR(255)   NOT NULL UNIQUE,
+  userPwd    VARCHAR(255)   NOT NULL,
+  roleID     INT            NOT NULL COMMENT 'FK → roles.roleID',
+  createdAt  DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedAt  DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP 
+                              ON UPDATE CURRENT_TIMESTAMP,
+  INDEX ix_users_role (roleID),  -- 修正索引語法
+  CONSTRAINT fk_users_roles 
+    FOREIGN KEY (roleID) REFERENCES roles(roleID)
+      ON DELETE RESTRICT 
+      ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 修正後的 password_resets 表
+CREATE TABLE password_resets (
+  resetID     INT            NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  userID      INT            NOT NULL COMMENT 'FK → users.userID',
+  token       VARCHAR(255)   NOT NULL UNIQUE,
+  expiresAt   DATETIME       NOT NULL,
+  createdAt   DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX ix_pr_user (userID),  -- 修正索引語法
+  CONSTRAINT fk_pr_user 
+    FOREIGN KEY (userID) REFERENCES users(userID)
+      ON DELETE CASCADE 
+      ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
