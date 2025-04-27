@@ -38,10 +38,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Courses Manager login</title>
+    <title>Course Login</title>
     <link rel="stylesheet" href="../../public/css/courses.css">
     <style>
         body {

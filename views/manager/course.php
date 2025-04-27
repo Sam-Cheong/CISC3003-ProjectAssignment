@@ -70,7 +70,7 @@ $courses = $courseModel->getAllCourses();
 ?>
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Course Management</title>

@@ -3,32 +3,37 @@ session_start();
 require_once __DIR__ . '/../models/Course.php';
 require_once __DIR__ . '/../models/User.php';
 
-class Courses {
+class Courses
+{
     private $courseModel;
     private $userModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->courseModel = new Course();
         $this->userModel = new User();
-        
+
 
         $this->checkAuth();
     }
-    
 
-    private function checkAuth() {
-        if(!isset($_SESSION['user_id']) || !isset($_SESSION['role_id']) || ($_SESSION['role_id'] != 1 && $_SESSION['role_id'] != 2)) {
+    private function checkAuth()
+    {
+        if (!isset($_SESSION['user_id']) || !isset($_SESSION['role_id']) || ($_SESSION['role_id'] != 1 && $_SESSION['role_id'] != 2)) {
             $_SESSION['error'] = 'You must be logged in as an administrator or manager to access this page!';
             header('Location: ../views/manager/login.php');
             exit();
         }
     }
 
-    public function index() {
+    public function index()
+    {
         $courses = $this->courseModel->getAllCourses();
         require_once __DIR__ . '/../views/manager/course.php';
     }
-    public function create() {
+
+    public function create()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'course_code' => trim($_POST['course_code']),
@@ -46,8 +51,9 @@ class Courses {
         header('Location: course.php');
         exit();
     }
-    
-    public function update() {
+
+    public function update()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
                 'course_id'   => $_POST['course_id'],
@@ -66,8 +72,9 @@ class Courses {
         header('Location: course.php');
         exit();
     }
-    
-    public function delete() {
+
+    public function delete()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['course_id'])) {
             if ($this->courseModel->deleteCourse($_POST['course_id'])) {
                 $_SESSION['success'] = 'Course deleted successfully!';
@@ -78,8 +85,9 @@ class Courses {
         header('Location: course.php');
         exit();
     }
-    
-    public function edit($id) {
+
+    public function edit($id)
+    {
         $course = $this->courseModel->getCourseById($id);
         $courses = $this->courseModel->getAllCourses();
         require_once __DIR__ . '/../views/manager/course.php';
