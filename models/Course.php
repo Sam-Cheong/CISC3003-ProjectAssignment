@@ -100,4 +100,19 @@ class Course {
         }
     }
 
+    public function searchCourses(string $keyword) {
+        // $keyword = trim($keyword);
+        // // 轉譯特殊符號，防止 XSS
+        // $keyword = htmlspecialchars($keyword);
+        // // 利用萬用字元%
+        $searchTerm = '%' . $keyword . '%';
+        
+        $sql = "SELECT * FROM courses 
+                WHERE course_name LIKE :search";
+                // OR courseDescription LIKE :search";
+        $this->db->query($sql);
+        $this->db->bind(':search', $searchTerm);
+        $results = $this->db->resultSet();  // 假設有此方法返回多筆結果
+        return $results;
+    }
 }

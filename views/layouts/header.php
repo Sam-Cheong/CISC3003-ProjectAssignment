@@ -6,8 +6,12 @@
     </span>
 
     <div class="nav-search">
-        <input type="text" name="nav-course-search" id="nav-course-search" placeholder="Search">
-        <i class="ri-search-line"></i>
+        <form action="/CISC3003-ProjectAssignment/controllers/SearchController.php" method="get">
+            <input type="hidden" name="action" value="search">
+            <input type="text" name="q" id="nav-course-search" placeholder="Search">
+            <i class="ri-search-line"></i>
+            <!-- <button type="submit">Search</button> -->
+        </form>       
     </div>
 
     <ul class="nav-links">

@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS roles (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 修正後的 users 表
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   userID     INT            PRIMARY KEY AUTO_INCREMENT,
   userName   VARCHAR(255)   NOT NULL,
   userEmail  VARCHAR(255)   NOT NULL UNIQUE,
@@ -22,7 +22,7 @@ CREATE TABLE users (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 修正後的 password_resets 表
-CREATE TABLE password_resets (
+CREATE TABLE IF NOT EXISTS password_resets (
   resetID     INT            NOT NULL AUTO_INCREMENT PRIMARY KEY,
   userID      INT            NOT NULL COMMENT 'FK → users.userID',
   token       VARCHAR(255)   NOT NULL UNIQUE,
@@ -34,3 +34,16 @@ CREATE TABLE password_resets (
       ON DELETE CASCADE 
       ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS courses (
+  course_id INT AUTO_INCREMENT PRIMARY KEY,
+  course_code VARCHAR(50) UNIQUE NOT NULL,
+  course_name VARCHAR(100) NOT NULL,
+  teacher VARCHAR(100) NOT NULL,
+  schedule VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (userName, userEmail, userPwd, roleID) 
+VALUES ('manager', 'manager@example.com', '123456', 2);
+
