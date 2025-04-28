@@ -51,7 +51,7 @@ desktop.ini
 
 # === 其他可選項目（如 DB dump）===
 # *.sql
-*.sqlite
+# *.sqlite
 *.bak
 *.old
 *.zip
