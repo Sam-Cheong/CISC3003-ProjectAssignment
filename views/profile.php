@@ -1,0 +1,121 @@
+<?php
+session_start();
+require_once __DIR__ . '/../helpers/session_helper.php';
+require_once __DIR__ . '/../controllers/Enrollments.php';
+
+
+// 若使用者未登入則導回登入頁
+if (!isset($_SESSION['userID'])) {
+    redirect('./login.php');
+}
+
+// 假設未來會透過 Model 撈取該使用者的課程資料，
+// 目前先使用空陣列或示範資料
+$enrollment = new Enrollment();  // 假設這是用來獲取使用者課程的控制器
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/style.css">
+    <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/courses.css">
+</head>
+<body>
+    <?php require_once './layouts/header.php'; ?>
+    <main>
+        <section class="profile-section" style="max-width:1200px; margin:40px auto; padding:0 20px;">
+            <h1 class="profile-title" style="font-size:2rem; margin-bottom:20px;">User Profile</h1>
+            <div class="profile-info" style="margin-bottom:40px;">
+                <p><strong>Username:</strong> <?= htmlspecialchars($_SESSION['username']) ?></p>
+                <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['email']) ?></p>
+                <!-- 可根據需要補充更多個人資訊 -->
+            </div>
+            <div class="profile-courses">
+                <h2 class="subtitle">My Courses</h2>
+                <?php if (!empty($userCourses)) : ?>
+                    <div class="course-list">
+                        <?php foreach ($userCourses as $course) : ?>
+                            <div class="course-card">
+                                <div class="course-code"><?= htmlspecialchars($course->course_code) ?></div>
+                                <h3 class="course-name"><?= htmlspecialchars($course->course_name) ?></h3>
+                                <div class="course-teacher">
+                                    <i class="ri-user-line"></i>
+                                    <?= htmlspecialchars($course->teacher) ?>
+                                </div>
+                                <div class="course-schedule">
+                                    <i class="ri-time-line"></i>
+                                    <?= htmlspecialchars($course->schedule) ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else : ?>
+                    <p>You haven't added any courses yet.</p>
+                <?php endif; ?>
+            </div>
+        </section>
+    </main>
+    <?php require_once './layouts/footer.php'; ?>
+</body>
+</html>
+```// filepath: c:\xampp\htdocs\CISC3003-ProjectAssignment\views\profile.php
+<?php
+session_start();
+require_once __DIR__ . '/../helpers/session_helper.php';
+
+// 若使用者未登入則導回登入頁
+if (!isset($_SESSION['userID'])) {
+    redirect('./login.php');
+}
+
+// 假設未來會透過 Model 撈取該使用者的課程資料，
+// 目前先使用空陣列或示範資料
+$userCourses = [];  // 或改為從模型取得實際資料，例如：$userCourses = $courseModel->getUserCourses($_SESSION['userID']);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/style.css">
+    <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/courses.css">
+</head>
+<body>
+    <?php require_once './layouts/header.php'; ?>
+    <main>
+        <section class="profile-section" style="max-width:1200px; margin:40px auto; padding:0 20px;">
+            <h1 class="profile-title" style="font-size:2rem; margin-bottom:20px;">User Profile</h1>
+            <div class="profile-info" style="margin-bottom:40px;">
+                <p><strong>Username:</strong> <?= htmlspecialchars($_SESSION['username']) ?></p>
+                <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['email']) ?></p>
+                <!-- 可根據需要補充更多個人資訊 -->
+            </div>
+            <div class="profile-courses">
+                <h2 class="subtitle">My Courses</h2>
+                <?php if (!empty($userCourses)) : ?>
+                    <div class="course-list">
+                        <?php foreach ($userCourses as $course) : ?>
+                            <div class="course-card">
+                                <div class="course-code"><?= htmlspecialchars($course->course_code) ?></div>
+                                <h3 class="course-name"><?= htmlspecialchars($course->course_name) ?></h3>
+                                <div class="course-teacher">
+                                    <i class="ri-user-line"></i>
+                                    <?= htmlspecialchars($course->teacher) ?>
+                                </div>
+                                <div class="course-schedule">
+                                    <i class="ri-time-line"></i>
+                                    <?= htmlspecialchars($course->schedule) ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else : ?>
+                    <p>You haven't added any courses yet.</p>
+                <?php endif; ?>
+            </div>
+        </section>
+    </main>
+    <?php require_once './layouts/footer.php'; ?>
+</body>
+</html>

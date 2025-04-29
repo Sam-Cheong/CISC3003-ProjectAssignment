@@ -9,9 +9,20 @@ class Course {
         $this->db = new Database();
     }
 
+    public function __destruct() {
+        $this->db = null;
+    }
+
+    private $attributes = ['course_code', 'course_name', 'teacher', 'schedule', 'description', 'created_at'];
+
+    public function exist($course_code) {
+        $this->db->query("SELECT course_id FROM courses WHERE course_code = :code");
+        $this->db->bind(':code', $course_code);
+        $result = $this->db->single();
+        return $result ? true : false;
+    }
 
     public function createCourse($data) {
-
         $this->db->query('SELECT `course_id` FROM `courses` WHERE `course_code` = :code');
         $this->db->bind(':code', $data['course_code']);
         $existing = $this->db->single();
@@ -97,4 +108,36 @@ class Course {
         }
     }
 
+    public function searchCourses(string $keyword, ?string $attribute = null) {
+        $keywords = array_filter(array_map('trim', explode(' ', $keyword)));
+        if (empty($keywords)) {
+            // Return all courses if no valid keyword provided.
+            return $this->getAllCourses();
+        }
+        
+        $conditions = [];
+        if (!isset($attribute)) {
+            foreach($this->attributes as $attr){
+                foreach ($keywords as $index => $word) {
+                    $conditions[] = $attr . ' LIKE :search' . $index;
+                }
+            }
+            
+        }else{
+            foreach ($keywords as $index => $word) {
+                $conditions[] = $attribute . ' LIKE :search' . $index;
+            }
+        }
+        
+        $sql = "SELECT * FROM courses WHERE " . implode(' OR ', $conditions);
+        $this->db->query($sql);
+        
+        // Bind each keyword parameter
+        foreach ($keywords as $index => $word) {
+            $this->db->bind(':search' . $index, '%' . $word . '%');
+        }
+        
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }

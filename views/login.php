@@ -47,6 +47,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
             success = document.querySelector(".form-message-green");
             if (success) {
                 setTimeout(function() {
+                    // register 成功後跳 login.php，login 成功後跳 dashboard.php
                     const current = window.location.pathname;
                     if (current.endsWith('register.php')) {
                         window.location.href = 'login.php';

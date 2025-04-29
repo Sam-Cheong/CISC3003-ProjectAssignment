@@ -6,8 +6,12 @@
     </span>
 
     <div class="nav-search">
-        <input type="text" name="nav-course-search" id="nav-course-search" placeholder="Search">
-        <i class="ri-search-line"></i>
+        <form id="search-form" action="/CISC3003-ProjectAssignment/controllers/SearchController.php" method="get">
+            <input type="hidden" name="action" value="search">
+            <input type="text" name="q" id="nav-course-search" placeholder="Search" 
+                value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>">
+            <i class="ri-search-line" onclick="document.getElementById('search-form').submit();"></i>
+        </form>       
     </div>
 
     <ul class="nav-links">
