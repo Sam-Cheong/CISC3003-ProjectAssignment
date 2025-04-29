@@ -23,10 +23,10 @@ require_once __DIR__ . '/../helpers/session_helper.php';
             <h1>Login</h1>
             <div id="error-container"></div>
             <form id="login-form" action="../controllers/Users.php" method="post">
-                <input type="hidden" name="type" value="login">
+                <input type="hidden" name="type" value="customer-login">
                 <div class="form-group">
-                    <input type="text" name="username-email" id="email" class="form-input" placeholder="Username or Email">
-                    <label class="form-label" for="email">Username or Email</label>
+                    <input type="text" name="username-email" id="username-email" class="form-input" placeholder="Username or Email">
+                    <label class="form-label" for="username-email">Username or Email</label>
                     <i class="ri-mail-line"></i>
                 </div>
                 <div class="form-group">
@@ -47,14 +47,13 @@ require_once __DIR__ . '/../helpers/session_helper.php';
             success = document.querySelector(".form-message-green");
             if (success) {
                 setTimeout(function() {
-                // register 成功後跳 login.php，login 成功後跳 dashboard.php
-                const current = window.location.pathname;
-                if (current.endsWith('register.php')) {
-                    window.location.href = 'login.php';
-                } else if (current.endsWith('login.php')) {
-                    window.location.href = '../index.php';
-                }
-    }, 3000)
+                    const current = window.location.pathname;
+                    if (current.endsWith('register.php')) {
+                        window.location.href = 'login.php';
+                    } else if (current.endsWith('login.php')) {
+                        window.location.href = '../index.php';
+                    }
+                }, 2000)
             }
         })
     </script>

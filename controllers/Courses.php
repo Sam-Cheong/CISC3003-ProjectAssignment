@@ -105,8 +105,6 @@ if ($action === 'create') {
     $controller->delete();
 } elseif ($action === 'edit' && isset($_GET['id'])) {
     $controller->edit($_GET['id']);
-} elseif (false) {
-    
 } else {
     $controller->index();
 }

@@ -110,7 +110,7 @@ class Users
     /**
      * Login with username or email
      */
-    public function login()
+    public function login($role)
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
         $login    = trim($_POST['username-email'] ?? '');
@@ -118,7 +118,11 @@ class Users
 
         if ($login === '' || $password === '') {
             flash('login', 'Please fill out all fields.', 'form-message form-message-red');
-            redirect('../views/login.php');
+            if ($role === 2) {
+                redirect('../views/manager/login.php');
+            } else {
+                redirect('../login.php');
+            }
         }
 
         $user = $this->userModel->login($login, $password);
@@ -138,6 +142,7 @@ class Users
         $_SESSION['userID']   = $user->userID;
         $_SESSION['email']    = $user->userEmail;   // from users.userEmail column
         $_SESSION['username'] = $user->userName;    // from users.userName column
+        $_SESSION['roleID'] = $user->roleID;    // from users.roleID column
         redirect('../views/login.php');
     }
 
@@ -230,8 +235,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'verify':
             $init->verify();
             break;
-        case 'login':
-            $init->login();
+        case 'customer-login':
+            $init->login(3);
+            break;
+        case 'manager-login':
+            $init->login(2);
             break;
         case 'forgot':
             $init->forgot();
