@@ -1,3 +1,4 @@
+-- DATABASE initialization
 CREATE DATABASE IF NOT EXISTS course_enrollment;
 
 USE course_enrollment;
@@ -9,7 +10,7 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE
-    users (
+    IF NOT EXISTS users (
         userID INT PRIMARY KEY AUTO_INCREMENT,
         userName VARCHAR(255) NOT NULL,
         userEmail VARCHAR(255) NOT NULL UNIQUE,
@@ -22,7 +23,7 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE
-    password_resets (
+    IF NOT EXISTS password_resets (
         resetID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         userID INT NOT NULL COMMENT 'FK → users.userID',
         token VARCHAR(255) NOT NULL UNIQUE,
@@ -33,7 +34,7 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE
-    courses (
+    IF NOT EXISTS courses (
         course_id INT AUTO_INCREMENT PRIMARY KEY,
         course_code VARCHAR(50) UNIQUE NOT NULL,
         course_name VARCHAR(100) NOT NULL,
@@ -41,3 +42,22 @@ CREATE TABLE
         schedule VARCHAR(100) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+
+CREATE TABLE
+    IF NOT EXISTS enrollments (
+        enrollmentID INT AUTO_INCREMENT PRIMARY KEY,
+        userID INT NOT NULL COMMENT 'FK -> users.userID',
+        course_id INT NOT NULL COMMENT 'FK -> courses.course_id',
+        'status' ENUM('pending', 'confirmed', 'active', 'finished') NOT NULL DEFAULT 'pending',
+        -- fee INT NOT NULL
+        createdAt DATETIME NOT NULL CURRENT_TIMESTAMP
+        -- cancellAt DATETIME DEFAULT NULL
+        -- paidAt DATETIME DEFAULT NULL
+        CONSTRAINT fk_enroll_user FOREIGN KEY (userID) REFERENCES users (userID) ON DELETE CASCADE ON UPDATE CASCADE,
+        CONSTRAINT fk_enroll_course FOREIGN KEY (course_id) REFERENCES courses (course_id) ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+
+-- Test Case
+-- INSERT INTO users (userName, userEmail, userPwd, roleID) 
+--  VALUES ('manager', 'manager@example.com', '123456', 2);

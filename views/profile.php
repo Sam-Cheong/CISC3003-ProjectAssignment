@@ -3,15 +3,14 @@ session_start();
 require_once __DIR__ . '/../helpers/session_helper.php';
 require_once __DIR__ . '/../controllers/Enrollments.php';
 
-
 // 若使用者未登入則導回登入頁
 if (!isset($_SESSION['userID'])) {
     redirect('./login.php');
 }
 
-// 假設未來會透過 Model 撈取該使用者的課程資料，
+$enrollment = new Enrollments();  // 假設這是用來獲取使用者課程的控制器
 // 目前先使用空陣列或示範資料
-$enrollment = new Enrollment();  // 假設這是用來獲取使用者課程的控制器
+$userCourses = [];  // 或改為從模型取得實際資料，例如：$userCourses = $courseModel->getUserCourses($_SESSION['userID']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
