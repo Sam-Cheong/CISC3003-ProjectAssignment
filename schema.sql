@@ -48,7 +48,8 @@ CREATE TABLE
         enrollmentID INT AUTO_INCREMENT PRIMARY KEY,
         userID INT NOT NULL COMMENT 'FK -> users.userID',
         course_id INT NOT NULL COMMENT 'FK -> courses.course_id',
-        'status' ENUM('pending', 'confirmed', 'active', 'finished') NOT NULL DEFAULT 'pending',
+        'status' ENUM('pending', 'active', 'finished') NOT NULL DEFAULT 'pending',
+        -- 'status' ENUM('pending', 'confirmed', 'active', 'finished') NOT NULL DEFAULT 'pending',
         -- fee INT NOT NULL
         createdAt DATETIME NOT NULL CURRENT_TIMESTAMP
         -- cancellAt DATETIME DEFAULT NULL

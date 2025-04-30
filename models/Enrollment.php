@@ -14,11 +14,9 @@ class Enrollment {
 
     /*  數據格式
         $enrollmentdata = [
-        'enrollmentID' => isset($_POST['enrollmentID']) ? trim($_POST['enrollmentID']) : null,
-        'userID'   => trim($_POST['userID']),
-        'courseID' => trim($_POST['courseID'])
-        'status' => ENUM('pending', 'confirmed', 'active', 'finished')
-        'createdAt' => DATETIME NOT NULL CURRENT_TIMESTAMP
+            'userID'   => trim($_POST['userID']),
+            'course_code' => trim($_POST['course_code'])
+            'status' => ENUM('pending', 'confirmed', 'active', 'finished')
         ];
 
         (array) enrollmentdata: 以array存儲的純數據，通常是尚未寫入數據庫的申請
@@ -78,6 +76,22 @@ class Enrollment {
         $this->db->query('DELETE FROM enrollments WHERE enrollmentID = :eid');
         $this->db->bind(':eid', $enrollment->enrollmentID);
         return $this->db->execute();
+    }
+
+    /**
+     * Get all enrollments (with course details).
+     *
+     * @return array[$enrollment] Returns an array of enrollment records.
+     */
+    public function getEnrollments(): array {
+        $this->db->query('
+            SELECT e.*, c.course_id, c.course_code, c.course_name, c.teacher, c.schedule
+            FROM enrollments e 
+            JOIN courses c ON e.course_id = c.course_id
+            ORDER BY e.enrollmentID DESC
+        ');
+        $enrollments = $this->db->resultSet();
+        return $enrollments;
     }
 
     /**
