@@ -6,7 +6,7 @@
     </span>
 
     <div class="nav-search">
-        <form id="search-form" action="/CISC3003-ProjectAssignment/controllers/SearchController.php" method="get">
+        <form id="search-form" action="/CISC3003-ProjectAssignment/controllers/Searches.php" method="get">
             <input type="hidden" name="action" value="search">
             <input type="text" name="q" id="nav-course-search" placeholder="Search" 
                 value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>">
