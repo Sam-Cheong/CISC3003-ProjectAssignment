@@ -27,6 +27,9 @@ $courses = $courseModel->getAllCourses();  // 获取所有课程
                             <i class="ri-time-line"></i>
                             <?= htmlspecialchars($course->schedule) ?>
                         </div>
+                        <span class="course-btns">
+                            <a href= <?php echo "./detail.php?id=" . $course->course_id; ?> >View</a>
+                        </span>
                     </div>
                 <?php endforeach; ?>
             <?php else : ?>

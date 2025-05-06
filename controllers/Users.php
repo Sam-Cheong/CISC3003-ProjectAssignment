@@ -158,13 +158,13 @@ class Users
 
         if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             flash('forgot', 'Please enter a valid email.', 'form-message form-message-red');
-            redirect('../views/forgot.php');
+            redirect('../views/user/forgotPwd.php');
         }
 
         $user = $this->userModel->findUserByEmailOrUsername($email, $email);
         if (!$user) {
             flash('forgot', 'No account found with that email.', 'form-message form-message-red');
-            redirect('../views/forgot.php');
+            redirect('../views/user/forgotPwd.php');
         }
 
         $token   = bin2hex(random_bytes(16));
