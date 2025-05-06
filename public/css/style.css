@@ -44,6 +44,7 @@ header {
     justify-content: space-between;
     padding: 0 40px;
     gap: 40px;
+    z-index: 999;
 }
 
 a {
@@ -70,11 +71,13 @@ a {
     width: 500px;
     padding: 10px 15px;
     border-radius: 20px;
+    transition: 0.3s;
 }
 
 .nav-search input:focus {
     /* background-color: rgba(0, 0, 0, 0.05); */
     border: 1px solid #578FCA;
+    box-shadow: 10px 10px 10px #c5c5c5;
 }
 
 .nav-search i {
@@ -288,33 +291,118 @@ main {
     color: #34ad21;
 }
 
-@media screen and (max-width: 1200px) {
-    
+#hero .hero-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: calc(100dvh - 160px);
 }
+
+#hero .hero-left {
+    max-width: 40dvw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hero-left h1 {
+    font-size: 5rem;
+    color: transparent;
+    background: linear-gradient(to right, #2973B2, #578FCA);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.hero-left p {
+    font-size: 1.5rem;
+}
+
+.btn-3d {
+    padding: 0.1em 0.25em;
+    width: 13em;
+    height: 4.2em;
+    margin-top: 20px;
+    background-color: #212121;
+    border: 0.08em solid #fff;
+    border-radius: 0.3em;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-3d span {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0.4em;
+    width: 8.25em;
+    height: 2.5em;
+    /* background-color: #212121; */
+    background: linear-gradient(90deg, #578FCA, #212121);
+    border-radius: 0.2em;
+    font-size: 1.5em;
+    color: #fff;
+    border: 0.08em solid #fff;
+    box-shadow: 0 0.4em 0.1em 0.019em #fff;
+}
+
+.btn-3d span:hover {
+    transition: all 0.5s;
+    transform: translate(0, 0.4em);
+    box-shadow: 0 0 0 0 #fff;
+}
+
+.btn-3d span:not(hover) {
+    transition: all 1s;
+}
+
+#hero .hero-container .hero-right img {
+    max-width: 50dvw;
+}
+
+.popular-courses {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 40px;
+    margin-top: 40px;
+}
+
+.popular-course {
+    color: #FFFFFF;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #578FCA, #86B3E3);
+    box-shadow: 20px 20px 40px #BEBEBE, -20px -20px 20px #FFFFFF;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+@media screen and (max-width: 1200px) {}
 
 @media screen and (max-width: 768px) {
     header {
         flex-wrap: wrap;
     }
-    
+
     .nav-logo {
         margin-bottom: 10px;
     }
-    
+
     .nav-search {
         width: 100%;
         margin: 10px 0;
     }
-    
+
     .nav-search input {
         padding: 10px 35px 10px 15px;
     }
-    
+
     .nav-search i {
         right: 15px;
         font-size: 1.2rem;
     }
-    
+
     .nav-links {
         flex: 1 0 100%;
         text-align: center;
