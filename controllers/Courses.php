@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__ . '/../models/Course.php';
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../helpers/session_helper.php';
 
 class Courses
 {
@@ -12,6 +13,7 @@ class Courses
     {
         $this->courseModel = new Course();
         $this->userModel = new User();
+        $this->checkAuth();// Fix to session-helper.php
     }
 
     private function checkAuth()
@@ -90,3 +92,20 @@ class Courses
         require_once __DIR__ . '/../views/manager/course.php';
     }
 }
+
+//Fix get to post method
+$action = $_GET['action'] ?? 'index';
+$controller = new Courses();
+
+if ($action === 'create') {
+    $controller->create();
+} elseif ($action === 'update') {
+    $controller->update();
+} elseif ($action === 'delete') {
+    $controller->delete();
+} elseif ($action === 'edit' && isset($_GET['id'])) {
+    $controller->edit($_GET['id']);
+} else {
+    $controller->index();
+}
+
