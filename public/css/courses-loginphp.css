@@ -1,0 +1,22 @@
+/* Styles copied from original login.php - adjust as needed */
+body {
+    font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;
+    display: flex; justify-content: center; align-items: center; height: 100vh;
+}
+.login-container { background-color: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 350px; }
+h2 { text-align: center; color: #333; margin-bottom: 25px; }
+.form-group { margin-bottom: 20px; }
+label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+input[type="email"], input[type="password"] {
+    width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 14px;
+}
+input[type="email"]:focus, input[type="password"]:focus { border-color: #4CAF50; outline: none; }
+.btn-submit {
+    width: 100%; padding: 12px; background-color: #4CAF50; color: white; border: none;
+    border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background-color 0.3s ease;
+}
+.btn-submit:hover { background-color: #45a049; }
+.alert { padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid transparent; }
+.error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+ /* Add style for info message if needed */
+ .info { background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; }
