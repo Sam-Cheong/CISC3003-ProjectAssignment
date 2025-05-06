@@ -90,22 +90,21 @@ class Enrollments {
 
     public function showSelfEnrollments() {
         $enrollments = $this->enrollmentModel->getEnrollmentsByUser($_SESSION['userID']);
-        
+        return $enrollments;
     }
 }
 
-// 基本的路由機制：根據 GET 參數 action 處理不同請求
+$enrollments = new Enrollments();
 $action = $_GET['action'] ?? '';
 
 switch ($action) {
     case 'enroll':
-        $this->enroll();
+        $enrollments->enroll();
         break;
     case 'remove':
-        $this->remove();
+        $enrollments->remove();
         break;
     default:
-        $this->showSelfEnrollments();
+        $enrollments->showSelfEnrollments();
         break;
 }
-?>

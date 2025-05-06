@@ -1,11 +1,21 @@
 <?php
 
 require_once __DIR__ . '/../../helpers/session_helper.php';
-// require_once __DIR__ . '/../../controllers/Enrollments.php';
+isPermitee(2,3);
 
-if (!isset($_SESSION['userID'])) {
-    redirect('./login.php');
+if($_SESSION['roleID'] === 2) {
+    require_once __DIR__ . '/../../controllers/Enrollments_managers.php';
+    $enrollmentscontroller = new Enrollments();
+    $enrollments = $enrollmentscontroller->showSelfEnrollments();
+}elseif($_SESSION['roleID'] === 3) {
+    require_once __DIR__ . '/../../controllers/Enrollments_users.php';
+    $enrollmentscontroller = new Enrollments();
+    $enrollments = $enrollmentscontroller->showSelfEnrollments();
 }
+
+
+
+
 
 require_once '../layouts/header.php';
 
@@ -38,6 +48,29 @@ require_once '../layouts/header.php';
                     </div>
                 <?php else : ?>
                     <p>You haven't added any courses yet.</p>
+                <?php endif; ?>
+            </div>
+            <div class="profile-enrollments">
+                <h2 class="subtitle">My Enrollments</h2>
+                <?php if (!empty($enrollments)) : ?>
+                    <div class="course-list">
+                        <?php foreach ($enrollments as $index => $enrollment) : ?>
+                            <div class="enrollment-card">
+                                <div class="enrollment-number"><?= $index + 1 ?></div>
+                                <h3 class="enrollment-name"><?= htmlspecialchars($course->course_name) ?></h3>
+                                <div class="course-teacher">
+                                    <i class="ri-user-line"></i>
+                                    <?= htmlspecialchars($course->teacher) ?>
+                                </div>
+                                <div class="course-schedule">
+                                    <i class="ri-time-line"></i>
+                                    <?= htmlspecialchars($course->schedule) ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else : ?>
+                    <p>You haven't added any enrollment yet.</p>
                 <?php endif; ?>
             </div>
         </section>

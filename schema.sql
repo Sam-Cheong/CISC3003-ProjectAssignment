@@ -48,10 +48,10 @@ CREATE TABLE
         enrollmentID INT AUTO_INCREMENT PRIMARY KEY,
         userID INT NOT NULL COMMENT 'FK -> users.userID',
         course_id INT NOT NULL COMMENT 'FK -> courses.course_id',
-        'status' ENUM('pending', 'active', 'finished') NOT NULL DEFAULT 'pending',
+        status ENUM('pending', 'active', 'finished') NOT NULL DEFAULT 'pending',
         -- 'status' ENUM('pending', 'confirmed', 'active', 'finished') NOT NULL DEFAULT 'pending',
         -- fee INT NOT NULL
-        createdAt DATETIME NOT NULL CURRENT_TIMESTAMP
+        createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         -- cancellAt DATETIME DEFAULT NULL
         -- paidAt DATETIME DEFAULT NULL
         CONSTRAINT fk_enroll_user FOREIGN KEY (userID) REFERENCES users (userID) ON DELETE CASCADE ON UPDATE CASCADE,
