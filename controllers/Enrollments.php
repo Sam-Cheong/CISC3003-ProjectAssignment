@@ -1,5 +1,5 @@
 <?php
-// session_start();
+
 require_once __DIR__ . '/../helpers/session_helper.php';
 require_once __DIR__ . '/../models/Enrollment.php';
 
@@ -8,11 +8,7 @@ class Enrollments {
 
     public function __construct()
     {
-        $this->enrollmentModel = new Enrollment();
-    }
-
-    public function enroll() {
-        
+        $this->enrollmentModel = new Enrollment;
     }
 }
 
@@ -53,8 +49,10 @@ switch ($action) {
         break;
         
     default:
+        // 預設動作，顯示目前使用者的所有選課
         $userID = $_SESSION['userID'];
-        $userEnrollments = $enrollmentModel->getEnrollmentsByUser($userID);
+        $userEnrollments = $this->enrollmentModel->getEnrollmentsByUser($userID);
+        // require_once __DIR__ . '/../views/enrollments/list.php';
         break;
 }
 ?>

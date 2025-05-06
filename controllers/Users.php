@@ -1,10 +1,9 @@
 <?php
 // controllers/Users.php
-\session_start();
 
-require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../helpers/Mailer.php';
 require_once __DIR__ . '/../helpers/session_helper.php';
+require_once __DIR__ . '/../models/User.php';
 
 class Users
 {
@@ -53,7 +52,7 @@ class Users
         // 2. Uniqueness
         if ($this->userModel->findUserByEmailOrUsername($data['email'], $data['username'])) {
             flash('register', 'Username or email already taken.', 'form-message form-message-red');
-            redirect('../views/register.php');
+            redirect('../views/user/register.php');
         }
 
         // 3. Hash and temp store
@@ -71,11 +70,11 @@ class Users
         // 4. Send code
         if (!Mailer::sendVerification($data['email'], $code)) {
             flash('register', 'Failed to send verification email. Please try again.', 'form-message form-message-red');
-            redirect('../views/register.php');
+            redirect('../views/user/register.php');
         }
 
         // 5. Redirect to verify
-        redirect('../views/verify.php');
+        redirect('../views/user/verify.php');
     }
 
     /**
@@ -90,7 +89,7 @@ class Users
 
         if (!$temp || !User::verifyEmailCode($temp['email'], $entered)) {
             flash('verify', 'Invalid or expired code. Please try again.', 'form-message form-message-red');
-            redirect('../views/verify.php');
+            redirect('../views/user/verify.php');
         }
 
         // Persist
@@ -104,13 +103,13 @@ class Users
         unset($_SESSION['temp_user'], $_SESSION['email_verification']);
 
         flash('register_success', 'Registration complete! Please log in.', 'form-message form-message-green');
-        redirect('../views/login.php');
+        redirect('../views/user/login.php');
     }
 
     /**
      * Login with username or email
      */
-    public function login($role)
+    public function login()
     {
         $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
         $login    = trim($_POST['username-email'] ?? '');
@@ -118,11 +117,7 @@ class Users
 
         if ($login === '' || $password === '') {
             flash('login', 'Please fill out all fields.', 'form-message form-message-red');
-            if ($role === 2) {
-                redirect('../views/manager/login.php');
-            } else {
-                redirect('../login.php');
-            }
+            redirect("../views/user/login.php");
         }
 
         $user = $this->userModel->login($login, $password);
@@ -132,7 +127,7 @@ class Users
             $this->createUserSession($user);
         } else {
             flash('login', 'Invalid username/email or password.', 'form-message form-message-red');
-            redirect('../views/login.php');
+            redirect('../views/user/login.php');
         }
     }
 
@@ -143,7 +138,7 @@ class Users
         $_SESSION['email']    = $user->userEmail;   // from users.userEmail column
         $_SESSION['username'] = $user->userName;    // from users.userName column
         $_SESSION['roleID'] = $user->roleID;    // from users.roleID column
-        redirect('../views/login.php');
+        redirect('../views/user/login.php');
     }
 
     public function logout()
@@ -185,7 +180,7 @@ class Users
         }
 
         flash('login', 'A reset link has been sent to your email', 'form-message form-message-orange');
-        redirect('../views/login.php');
+        redirect('../views/user/login.php');
     }
 
     /**
@@ -200,27 +195,27 @@ class Users
 
         if (!$token || $password === '' || $confirmPwd === '') {
             flash('reset', 'Please fill out all fields.', 'form-message form-message-red');
-            redirect("../views/reset.php?token={$token}");
+            redirect("../views/user/resetPwd.php?token={$token}");
         }
         if ($password !== $confirmPwd) {
             flash('reset', 'Passwords do not match.', 'form-message form-message-red');
-            redirect("../views/reset.php?token={$token}");
+            redirect("../views/user/resetPwd.php?token={$token}");
         }
 
         $reset = $this->userModel->getPasswordResetByToken($token);
         if (!$reset || $reset->expiresAt < date('Y-m-d H:i:s')) {
             flash('reset', 'Invalid or expired token.', 'form-message form-message-red');
-            redirect('../views/forgot.php');
+            redirect('../views/user/forgotPwd.php');
         }
 
         $newHash = password_hash($password, PASSWORD_DEFAULT);
         if ($this->userModel->resetPassword($newHash, $reset->userEmail)) {
             $this->userModel->deletePasswordReset($token);
             flash('login', 'Your password has been reset. Please log in.', 'form-message form-message-orange');
-            redirect('../views/login.php');
+            redirect('../views/user/login.php');
         } else {
             flash('reset', 'Failed to reset password. Try again.', 'form-message form-message-red');
-            redirect("../views/reset.php?token={$token}");
+            redirect("../views/user/resetPwd.php?token={$token}");
         }
     }
 }
@@ -235,11 +230,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'verify':
             $init->verify();
             break;
-        case 'customer-login':
-            $init->login(3);
-            break;
-        case 'manager-login':
-            $init->login(2);
+        case 'login':
+            $init->login();
             break;
         case 'forgot':
             $init->forgot();

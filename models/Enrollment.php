@@ -11,21 +11,6 @@ class Enrollment {
     public function __destruct() {
         $this->db = null;
     }
-
-    /*  數據格式
-        $enrollmentdata = [
-            'userID'   => trim($_POST['userID']),
-            'course_code' => trim($_POST['course_code'])
-            'status' => ENUM('pending', 'confirmed', 'active', 'finished')
-        ];
-
-        (array) enrollmentdata: 以array存儲的純數據，通常是尚未寫入數據庫的申請
-        (stdClass) enrollment: 以stdClass存儲的記錄，通常是從數據庫讀取的單一記錄
-        (array) enrollments: 以array存儲的記錄組合，通常是從數據庫讀取的一組記錄
-    **/
-
-    // Check if the enrollment already exists
-    // Or convert (array) enrollmentdata to (stdClass) enrollment
     public function exist(array $enrollmentdata){
         if($enrollmentdata['enrollmentID'] != null) {
             // select by enrollmentID

@@ -12,9 +12,6 @@ class Courses
     {
         $this->courseModel = new Course();
         $this->userModel = new User();
-
-
-        $this->checkAuth();
     }
 
     private function checkAuth()
@@ -92,19 +89,4 @@ class Courses
         $courses = $this->courseModel->getAllCourses();
         require_once __DIR__ . '/../views/manager/course.php';
     }
-}
-
-$action = $_GET['action'] ?? 'index';
-$controller = new Courses();
-
-if ($action === 'create') {
-    $controller->create();
-} elseif ($action === 'update') {
-    $controller->update();
-} elseif ($action === 'delete') {
-    $controller->delete();
-} elseif ($action === 'edit' && isset($_GET['id'])) {
-    $controller->edit($_GET['id']);
-} else {
-    $controller->index();
 }
