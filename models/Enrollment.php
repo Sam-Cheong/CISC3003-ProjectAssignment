@@ -68,7 +68,7 @@ class Enrollment {
      *
      * @return array[$enrollment] Returns an array of enrollment records.
      */
-    public function getAllEnrollments(): array {
+    public function getEnrollments(): array {
         $this->db->query('
             SELECT e.*, c.course_id, c.course_code, c.course_name, c.teacher, c.schedule
             FROM enrollments e 
@@ -86,9 +86,6 @@ class Enrollment {
      * @return array[$enrollment] Returns an array of enrollment records.
      */
     public function getEnrollmentsByUser(int $userID): array {
-        if(empty($userID)){
-            return $this->getAllEnrollments();
-        }
         $this->db->query('
             SELECT e.*, c.course_id, c.course_code, c.course_name, c.teacher, c.schedule
             FROM enrollments e 
@@ -102,9 +99,6 @@ class Enrollment {
     }
 
     public function getEnrollmentsByCourse(int $course_id): array {
-        if(empty($userID)){
-            return $this->getAllEnrollments();
-        }
         $this->db->query('
             SELECT e.*, u.userID, u.userName, u.userEmail
             FROM enrollments e 

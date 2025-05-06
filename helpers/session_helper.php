@@ -55,7 +55,3 @@ function redirect(string $location): void
 function isLoggedIn() {
     return isset($_SESSION['userID']);
 }
-
-function isPermitee($permitee) {
-    return $permitee === $_SESSION['roleID'];
-}

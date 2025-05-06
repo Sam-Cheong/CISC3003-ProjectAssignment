@@ -1,6 +1,6 @@
 <?php
 // views/verify.php
-require_once __DIR__ . '/../helpers/session_helper.php';
+require_once __DIR__ . '/../../helpers/session_helper.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
             <h2>Email Verification</h2>
             <p>Please enter the 6 digit code we sent to your email.</p>
             <br>
-            <form action="../controllers/Users.php" method="post">
+            <form action="../../controllers/Users.php" method="post">
                 <?php flash('verify'); ?>
                 <?php flash('info'); ?>
                 <input type="hidden" name="type" value="verify">

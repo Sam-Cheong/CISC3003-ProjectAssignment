@@ -172,11 +172,11 @@ class Users
 
         $this->userModel->createPasswordReset($user->userID, $token, $expires);
 
-        $link = "http://localhost/CISC3003-ProjectAssignment/views/resetPwd.php?token={$token}";
+        $link = "http://localhost/CISC3003-ProjectAssignment/views/user/resetPwd.php?token={$token}";
 
         if (!Mailer::sendPasswordReset($email, $link)) {
             flash('forgot', 'Unable to send reset email. Try again later.', 'form-message form-message-red');
-            redirect('../views/forgot.php');
+            redirect('../views/user/forgotPwd.php');
         }
 
         flash('login', 'A reset link has been sent to your email', 'form-message form-message-orange');
