@@ -1,59 +1,53 @@
 <?php
-session_start();
-require_once __DIR__ . '/../../helpers/session_helper.php';
-
-if(isset($_SESSION['user_id']) && isset($_SESSION['role_id']) && ($_SESSION['role_id'] == 1 || $_SESSION['role_id'] == 2)) {
-    header('Location: course.php');
-    exit();
+// views/manager/login.php
+// Session should be started by the Auth controller before requiring this view
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Fallback
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Course Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../public/css/style.css">
+    <title>Manager Login</title>
+    <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/courses-loginphp.css">
 </head>
 <body>
+    <div class="login-container">
+        <h2>Manager Login</h2>
 
-    <?php require_once '../layouts/header.php'; ?>
+        <!-- Display Session Messages -->
+        <?php if(isset($_SESSION['error'])): ?>
+            <div class="alert error"><?= htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></div>
+        <?php endif; ?>
+        <?php if(isset($_SESSION['success'])): // Might show success message from other actions redirecting here ?>
+             <div class="alert success"><?= htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?></div>
+        <?php endif; ?>
+         <?php if(isset($_SESSION['info'])): // Optional info message ?>
+             <div class="alert info"><?= htmlspecialchars($_SESSION['info']); unset($_SESSION['info']); ?></div>
+         <?php endif; ?>
 
-    <main id="manager-login">
-        <div class="form-container">
-            <h1>Manager Login</h1>
-            <form action="../../controllers/Users.php" method="POST">
-                <input type="hidden" name="type" value="manager-login">
-                <div class="form-group">
-                    <input class="form-input" type="email" id="username-email" name="username-email" placeholder="Username or Email">
-                    <label class="form-label" for="username-email">Username or Email</label>
-                    <i class="ri-mail-line"></i>
-                </div>
-                <div class="form-group">
-                    <input class="form-input" type="password" id="password" name="password" placeholder="Password">
-                    <label class="form-label" for="password">Password</label>
-                    <i class="ri-lock-line"></i>
-                </div>
-                <button type="submit" class="form-btn">Login</button>
-            </form>
-        </div>
-    </main>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            success = document.querySelector(".form-message-green");
-            if (success) {
-                setTimeout(function() {
-                    const current = window.location.pathname;
-                    if (current.endsWith('register.php')) {
-                        window.location.href = 'login.php';
-                    } else if (current.endsWith('login.php')) {
-                        window.location.href = '../index.php';
-                    }
-                }, 2000)
-            }
-        })
-    </script>
+        <!-- Form submits to the Auth controller's processLogin action -->
+        <form method="post" action="Auth.php?action=login">
+            <!-- You could add a hidden input for action instead of using URL param if preferred -->
+             <!-- <input type="hidden" name="action" value="processLogin"> -->
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Login</button>
+        </form>
+         <!-- Optional: Link to forgot password or public site -->
+         <div style="text-align: center; margin-top: 20px;">
+             <a href="../index.php">Back to Course Page</a>
+         </div>
+    </div>
 </body>
 </html>

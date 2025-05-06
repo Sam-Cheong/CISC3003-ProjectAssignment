@@ -35,8 +35,9 @@ class User
      */
     public function register(array $data): bool
     {
+        // 如果没有指定角色ID，默认设为3（普通用户）
         if (!isset($data['roleID'])) {
-            $data['roleID'] = 3;
+            $data['roleID'] = 3; // 普通用户
         }
         
         $this->db->query(
@@ -64,11 +65,8 @@ class User
             return false;
         }
 
+        // 验证密码 (使用password_verify)
         if (password_verify($pwd, $row->userPwd)) {
-            return $row;
-        }
-        
-        if ($pwd === $row->userPwd) {
             return $row;
         }
 
