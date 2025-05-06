@@ -19,26 +19,14 @@ require_once '../layouts/header.php';
             </div>
             <div class="profile-courses">
                 <h2 class="subtitle">My Courses</h2>
-                <?php if (!empty($userCourses)) : ?>
-                    <div class="course-list">
-                        <?php foreach ($userCourses as $course) : ?>
-                            <div class="course-card">
-                                <div class="course-code"><?= htmlspecialchars($course->course_code) ?></div>
-                                <h3 class="course-name"><?= htmlspecialchars($course->course_name) ?></h3>
-                                <div class="course-teacher">
-                                    <i class="ri-user-line"></i>
-                                    <?= htmlspecialchars($course->teacher) ?>
-                                </div>
-                                <div class="course-schedule">
-                                    <i class="ri-time-line"></i>
-                                    <?= htmlspecialchars($course->schedule) ?>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                <?php else : ?>
-                    <p>You haven't added any courses yet.</p>
-                <?php endif; ?>
+                    <?php
+                        // 根據使用者角色顯示相應的課程列表
+                        if ($_SESSION['roleID'] === 2) {
+                            require_once __DIR__ . '/../../controllers/Courses.php';
+                        } elseif ($_SESSION['roleID'] === 3) {
+                            
+                        }
+                    ?>
             </div>
         </section>
     </main>

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/../models/Course.php';
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../helpers/session_helper.php';
@@ -13,22 +12,42 @@ class Courses
     {
         $this->courseModel = new Course();
         $this->userModel = new User();
-        $this->checkAuth();// Fix to session-helper.php
+        // $this->checkAuth();// Fix to session-helper.php
     }
 
     private function checkAuth()
     {
         if (!isset($_SESSION['user_id']) || !isset($_SESSION['role_id']) || ($_SESSION['role_id'] != 1 && $_SESSION['role_id'] != 2)) {
             $_SESSION['error'] = 'You must be logged in as an administrator or manager to access this page!';
-            header('Location: ../views/manager/login.php');
+            header('Location: ../manager/login.php');
             exit();
         }
     }
 
     public function index()
     {
-        $courses = $this->courseModel->getAllCourses();
-        require_once __DIR__ . '/../views/manager/course.php';
+        $userCourses = $this->courseModel->getAllCourses();
+        if (!empty($userCourses)) :
+        ?>
+            <div class="course-list">
+                <?php foreach ($userCourses as $course) : ?>
+                    <div class="course-card">
+                        <div class="course-code"><?= htmlspecialchars($course->course_code) ?></div>
+                        <h3 class="course-name"><?= htmlspecialchars($course->course_name) ?></h3>
+                        <div class="course-teacher">
+                            <i class="ri-user-line"></i>
+                            <?= htmlspecialchars($course->teacher) ?>
+                        </div>
+                        <div class="course-schedule">
+                            <i class="ri-time-line"></i>
+                            <?= htmlspecialchars($course->schedule) ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else : ?>
+            <p>You haven't added any courses yet.</p>
+        <?php endif;
     }
 
     public function create()
