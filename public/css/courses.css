@@ -1,129 +1,223 @@
+/* --- Existing Base Styles (Keep these or slight tweaks) --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* Modern font stack */
+    background-color: #f8f9fa; /* Lighter grey */
+    color: #343a40; /* Darker text */
+    line-height: 1.6;
+}
+
 .container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 20px;
+    max-width: 1140px; /* Wider container for more space */
+    margin: 30px auto;
+    padding: 30px;
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08); /* Softer shadow */
+    border-radius: 8px; /* Slightly larger radius */
 }
 
-.course-form {
-    background: #f5f5f5;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-bottom: 3rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
+.alert {
+    padding: 1rem; /* Use rem units */
     margin-bottom: 1.5rem;
+    border: 1px solid transparent;
+    border-radius: 0.3rem; /* Consistent radius */
+    display: flex; /* Align icon and text */
+    align-items: center;
+    gap: 0.75rem; /* Space between icon and text */
+}
+/* Optional: Add icons to alerts */
+/* .alert::before { font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f05a"; } */
+/* .alert.success::before { content: "\f058"; } */
+/* .alert.error::before { content: "\f071"; } */
+
+.alert.success { color: #0f5132; background-color: #d1e7dd; border-color: #badbcc; }
+.alert.error { color: #842029; background-color: #f8d7da; border-color: #f5c2c7; }
+
+.course-form, .course-list { margin-bottom: 2.5rem; } /* More bottom margin */
+
+.course-form h2, .course-list h2 {
+    border-bottom: 1px solid #dee2e6; /* Lighter border */
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.8rem;
+    color: #495057; /* Slightly softer heading color */
+    font-weight: 500; /* Medium font weight */
 }
 
-label {
+.form-group { margin-bottom: 1.25rem; } /* More space */
+
+.form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #333;
+    font-weight: 500; /* Medium weight labels */
+    color: #495057;
 }
 
-input[type="text"] {
+/* Unified input and textarea styling */
+.form-group input[type="text"],
+.form-group input[type="email"], /* Added for consistency if used elsewhere */
+.form-group input[type="password"], /* Added for consistency if used elsewhere */
+.form-group textarea {
     width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
+    padding: 0.75rem 1rem; /* More padding */
+    border: 1px solid #ced4da; /* Standard border color */
+    border-radius: 0.3rem; /* Consistent radius */
+    box-sizing: border-box;
+    font-size: 0.95rem; /* Slightly larger font */
+    line-height: 1.5;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Smooth transition */
 }
 
-.btn-submit {
-    background: #007bff;
-    color: white;
-    padding: 1rem 2rem;
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group textarea:focus {
+    border-color: #86b7fe; /* Bootstrap focus color */
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Bootstrap focus shadow */
+}
+
+/* Specific textarea styling */
+.form-group textarea {
+    min-height: 120px; /* Slightly taller */
+    resize: vertical;
+    font-family: inherit; /* Ensure consistent font */
+}
+
+/* Button styling */
+.btn-submit, .btn-cancel, .btn-edit, .btn-delete, .logout-btn {
+    padding: 0.6rem 1.2rem; /* Adjusted padding */
     border: none;
-    border-radius: 4px;
+    border-radius: 0.3rem;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9rem; /* Slightly smaller button font */
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none; /* Prevent text selection */
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.btn-submit:hover {
-    background: #0056b3;
-}
+.btn-submit { background-color: #198754; color: white; } /* Bootstrap success */
+.btn-submit:hover { background-color: #157347; }
+.btn-cancel { background-color: #6c757d; color: white; margin-left: 10px; } /* Bootstrap secondary */
+.btn-cancel:hover { background-color: #5c636a; }
+.btn-edit { background-color: #0d6efd; color: white; padding: 5px 10px; font-size: 0.8rem; } /* Bootstrap primary */
+.btn-edit:hover { background-color: #0b5ed7; }
+.btn-delete { background-color: #dc3545; color: white; padding: 5px 10px; font-size: 0.8rem; } /* Bootstrap danger */
+.btn-delete:hover { background-color: #bb2d3b; }
 
-.course-list {
-    max-width: 1200px;
-    margin: 40px auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
-    padding: 0 20px;
+/* User info and logout */
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #dee2e6;
 }
+.logout-btn { background-color: #dc3545; color: white; }
+.logout-btn:hover { background-color: #c82333; }
 
-.course-card {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: transform 0.3s ease;
-}
-
-.course-card:hover {
-    transform: translateY(-5px);
-}
-
-.course-code {
-    color: #2973B2;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.course-teacher {
-    color: #666;
-    font-size: 0.95em;
-    margin: 10px 0;
-}
-
-.course-schedule {
-    background: #f2f4f7;
-    padding: 8px;
-    border-radius: 6px;
-    font-size: 0.9em;
-}
-
+/* --- Table Styles (Major adjustments) --- */
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 1.5rem;
+    background-color: #fff; /* Ensure table bg is white */
+    border: 1px solid #dee2e6; /* Add outer border */
+    border-radius: 0.3rem; /* Optional: round corners */
+    overflow: hidden; /* Needed for border-radius */
+    /* REMOVED table-layout: fixed; to allow more natural column sizing, */
+    /* unless fixed layout is strictly required. If needed, re-add and */
+    /* carefully adjust percentages below. */
 }
 
-th,
-td {
-    padding: 1rem;
+th, td {
+    border: none; /* Remove individual cell borders */
+    border-bottom: 1px solid #dee2e6; /* Use bottom borders for rows */
+    padding: 0.9rem 1rem; /* Consistent padding */
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    vertical-align: top; /* Align content to top */
+    word-wrap: break-word; /* Allow long words to break */
 }
+
+/* Remove bottom border from last row */
+tr:last-child td {
+    border-bottom: none;
+}
+
 
 th {
-    background: #f8f9fa;
-    font-weight: 600;
+    background-color: #f8f9fa; /* Light header */
+    font-weight: 500; /* Medium weight header */
+    color: #495057;
+    white-space: nowrap; /* Prevent header text wrapping */
 }
 
-/* 消息提示 */
-.alert {
-    padding: 1rem;
-    margin-bottom: 2rem;
-    border-radius: 4px;
+/* Zebra striping - subtle */
+tr:nth-child(even) {
+    background-color: #f8f9fa;
 }
 
-.alert.error {
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+/* Hover effect */
+tr:hover {
+    background-color: #e9ecef;
 }
 
-.alert.success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+/* --- Column Specific Styles & Widths --- */
+/* NOTE: Without table-layout: fixed, these widths act more as suggestions */
+/* If you re-enable fixed layout, ENSURE THESE SUM TO 100% */
+/* th:nth-child(1), td:nth-child(1) { width: 10%; } /* Code */
+/* th:nth-child(2), td:nth-child(2) { width: 18%; } /* Name */
+/* th:nth-child(3), td:nth-child(3) { width: 15%; } /* Teacher */
+/* th:nth-child(4), td:nth-child(4) { width: 18%; } /* Schedule */
+/* th:nth-child(5), td:nth-child(5) { width: 24%; } /* Description */
+/* th:nth-child(6), td:nth-child(6) { width: 15%; } /* Created */
+
+/* --- Actions Column --- */
+th:last-child, /* Target last column for actions */
+td:last-child {
+    /* width: 10%; */ /* Width if using fixed layout */
+    text-align: center; /* Center align content */
+    vertical-align: middle; /* Vertically center buttons */
+    white-space: nowrap; /* Keep buttons on one line */
 }
 
-@media screen and (max-width: 768px) {
-    /* .course-list {
-        top:40%
-    } */
+.action-buttons{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
 }
+
+/* Ensure delete form doesn't add extra space */
+.action-buttons form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+/* Add a small margin between buttons */
+.action-buttons .btn-edit {
+    margin-right: 5px;
+}
+
+
+/* --- Description Column Styles --- */
+td.description-col {
+    /* If NOT using fixed layout, control width via max-width if needed */
+    /* max-width: 250px; */ /* Example max-width */
+    white-space: nowrap;       /* Keep on one line */
+    overflow: hidden;          /* Hide overflow */
+    text-overflow: ellipsis;   /* Show ... */
+    cursor: help;              /* Indicate hover reveals more */
+    /* Remove fixed width from here if set above */
+}
+
+/* Style for 'N/A' text */
+.na-text {
+    color: #6c757d;            /* Use Bootstrap's secondary text color */
+    font-style: italic;
+    font-size: 0.9em;          /* Slightly smaller */
+}
+
