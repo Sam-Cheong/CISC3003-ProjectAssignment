@@ -1,16 +1,15 @@
 <?php
 session_start();
 require_once __DIR__ . '/../helpers/session_helper.php';
-require_once __DIR__ . '/../controllers/Enrollments.php';
 
 // 若使用者未登入則導回登入頁
 if (!isset($_SESSION['userID'])) {
-    redirect('./login.php');
+    redirect('/CISC3003-ProjectAssignment/views/login.php');
+}elseif($_SESSION['roleID']===2){
+    require_once __DIR__ . '/../controllers/Enrollments_managers.php';
+}elseif($_SESSION['roleID']===3){
+    require_once __DIR__ . '/../controllers/Enrollments_users.php';
 }
-
-$enrollment = new Enrollments();  // 假設這是用來獲取使用者課程的控制器
-// 目前先使用空陣列或示範資料
-$userCourses = [];  // 或改為從模型取得實際資料，例如：$userCourses = $courseModel->getUserCourses($_SESSION['userID']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
