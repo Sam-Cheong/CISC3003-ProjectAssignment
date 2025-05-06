@@ -74,27 +74,15 @@ class Database {
 
     public function getResults(): array {
         $this->execute();
-        return $this->stmt->fetchAll();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function getResult(): mixed {
         $this->execute();
-        return $this->stmt->fetch();
+        return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
     public function rowCount(): int {
         return $this->stmt->rowCount();
     }
-
-
-    public function resultSet(): array {
-        $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    public function single() {
-        $this->execute();
-        return $this->stmt->fetch(PDO::FETCH_OBJ);
-    }
-
 }

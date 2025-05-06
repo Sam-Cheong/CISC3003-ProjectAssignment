@@ -55,16 +55,3 @@ function redirect(string $location): void
 function isLoggedIn() {
     return isset($_SESSION['userID']);
 }
-
-function isPermitee($permiteeID) {
-    return $permiteeID === $_SESSION['roleID'];
-}
-
-function verifyPermitee(int $permiteeID, ?int $anotherPermiteeID) {
-    if (!isLoggedIn()) {
-        redirect('/CISC3003-ProjectAssignment/views/login.php');
-    } elseif ($_SESSION['roleID'] != $permiteeID && $_SESSION['roleID'] != $anotherPermiteeID) {
-        flash('Access Denied', 'You do not have permission to access this page.');
-        exit();
-    }
-}

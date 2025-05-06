@@ -18,14 +18,14 @@ class Course {
     public function exist($course_code) {
         $this->db->query("SELECT course_id FROM courses WHERE course_code = :code");
         $this->db->bind(':code', $course_code);
-        $result = $this->db->single();
+        $result = $this->db->getResult();
         return $result ? true : false;
     }
 
     public function createCourse($data) {
         $this->db->query('SELECT `course_id` FROM `courses` WHERE `course_code` = :code');
         $this->db->bind(':code', $data['course_code']);
-        $existing = $this->db->single();
+        $existing = $this->db->getResult();
         
         if ($existing) {
             $_SESSION['error'] = 'Course code already exists!';
@@ -59,13 +59,13 @@ class Course {
             FROM courses 
             ORDER BY created_at DESC
         ');
-        return $this->db->resultSet();
+        return $this->db->getResults();
     }
 
     public function getCourseById($id) {
         $this->db->query('SELECT * FROM courses WHERE course_id = :id');
         $this->db->bind(':id', $id);
-        return $this->db->single();
+        return $this->db->getResult();
     }
 
     public function updateCourse($data) {
@@ -137,7 +137,7 @@ class Course {
             $this->db->bind(':search' . $index, '%' . $word . '%');
         }
         
-        $results = $this->db->resultSet();
+        $results = $this->db->getResults();
         return $results;
     }
 }

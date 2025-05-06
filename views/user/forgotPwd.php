@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../helpers/session_helper.php';
 
 <head>
     <meta charset="UTF-8">
-    <title>Forgot Password</title>
+    <title>CISC3003 | Forgot Password</title>
     <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/style.css">
 </head>
 

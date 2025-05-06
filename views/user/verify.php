@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../helpers/session_helper.php';
 
 <head>
     <meta charset="UTF-8">
-    <title>Verify Email</title>
+    <title>CISC3003 | Verify Email</title>
     <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/style.css">
 </head>
 
