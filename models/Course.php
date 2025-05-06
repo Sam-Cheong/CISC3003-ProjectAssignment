@@ -71,6 +71,20 @@ class Course {
         return $this->db->getResults() ?: [];
     }
 
+    // 在合适位置（比如 getAllCourses 方法后面）添加：
+    public function searchCourses(string $keyword): array {
+        $this->db->query('
+            SELECT course_id, course_code, course_name, teacher, schedule, description, created_at
+            FROM courses
+            WHERE course_name LIKE :keyword 
+                OR course_code LIKE :keyword 
+                OR teacher LIKE :keyword
+            ORDER BY created_at DESC
+        ');
+        $this->db->bind(':keyword', '%' . $keyword . '%');
+        return $this->db->getResults() ?: [];
+    }
+
     /**
      * Retrieves a single course by its ID, including description.
      * Returns a course object or null if not found.
