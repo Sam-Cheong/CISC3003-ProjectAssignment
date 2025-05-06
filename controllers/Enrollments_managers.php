@@ -88,8 +88,8 @@ class Enrollments {
         }
     }
 
-    public function showSelfEnrollments() {
-        $enrollments = $this->enrollmentModel->getEnrollmentsByUser($_SESSION['userID']);
+    public function showAllEnrollments() {
+        $enrollments = $this->enrollmentModel->getEnrollments();
         return $enrollments;
     }
 }
@@ -105,6 +105,6 @@ switch ($action) {
         $enrollments->remove();
         break;
     default:
-        $enrollments->showSelfEnrollments();
+        $enrollments->showAllEnrollments();
         break;
 }

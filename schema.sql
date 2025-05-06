@@ -62,3 +62,27 @@ CREATE TABLE
 -- Test Case
 -- INSERT INTO users (userName, userEmail, userPwd, roleID) 
 --  VALUES ('manager', 'manager@example.com', '123456', 2);
+-- 插入管理员用户（roleID = 2），密码为 "managerpass"
+-- INSERT INTO users (userName, userEmail, userPwd, roleID)
+-- VALUES ('manager', 'manager@example.com', '$2y$10$wHST7Q7V/vR7sT.lQ.nLUu7A.TF6Ea5je0Zr2fN3vApR2t1mv6Bxu', 2);
+
+-- -- 插入普通用户 Alice（roleID = 3），密码为 "password123"
+-- INSERT INTO users (userName, userEmail, userPwd, roleID)
+-- VALUES ('alice', 'alice@example.com', '$2y$10$wJST7Q7V/vR7sT.lQ.nLUu7A.TF6Ea5je0Zr2fN3vApR2t1mv6Bxu', 3);
+
+-- -- 插入普通用户 Bob（roleID = 3），密码为 "mypassword"
+-- INSERT INTO users (userName, userEmail, userPwd, roleID)
+-- VALUES ('bob', 'bob@example.com', '$2y$10$3LZk7cRFS0vbqC3L7BAnPeKCqRhwLk1yuuPrD5mBjEXwTknDxOj1a', 3);
+
+
+-- -- 示例 1：用户 1（manager）报名课程 2 (Math)，状态设置为 active
+-- INSERT INTO enrollments (userID, course_id, status) 
+-- VALUES (1, 2, 'active');
+
+-- -- 示例 3：用户 3（bob）报名课程 4 (History)，状态设置为 finished
+-- INSERT INTO enrollments (userID, course_id, status)
+-- VALUES (3, 4, 'finished');
+
+-- -- 示例 5：用户 1（manager）报名课程 6 (Art)，使用默认的 pending 状态
+-- INSERT INTO enrollments (userID, course_id)
+-- VALUES (1, 6);
