@@ -1,6 +1,6 @@
 <?php
 // views/forgot.php
-require_once __DIR__ . '/../helpers/session_helper.php';
+require_once __DIR__ . '/../../helpers/session_helper.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@ require_once __DIR__ . '/../helpers/session_helper.php';
     <main id="forgot-pwd">
         <div class="form-container">
             <h1>Forgot Password</h1>
-            <form action="../controllers/Users.php" method="post">
+            <form action="../../controllers/Users.php" method="post">
                 <?php flash('forgot'); ?>
                 <input type="hidden" name="type" value="forgot">
                 <div class="form-group">

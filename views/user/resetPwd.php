@@ -1,22 +1,15 @@
 <?php
 // views/reset.php
-require_once __DIR__ . '/../helpers/session_helper.php';
+
+require_once __DIR__ . '/../../helpers/session_helper.php';
 $token = $_GET['token'] ?? '';
+require_once '../layouts/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Reset Password</title>
-    <link rel="stylesheet" href="/CISC3003-ProjectAssignment/public/css/style.css">
-</head>
-
-<body>
     <main id="reset-pwd">
         <div class="form-container">
             <h1>Reset Password</h1>
-            <form id="reset-pwd" action="../controllers/Users.php" method="post">
+            <form id="reset-pwd" action="../../controllers/Users.php" method="post">
                 <?php flash('reset'); ?>
                 <input type="hidden" name="type" value="reset">
                 <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
