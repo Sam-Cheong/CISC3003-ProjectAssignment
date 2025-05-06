@@ -7,18 +7,16 @@ include __DIR__ . '/views/layouts/header.php';
 require_once __DIR__ . '/models/Course.php';  // 新增引入课程模型
 //chnage model to controller
 
-// $courseModel = new Course();
+$courseModel = new Course();
 $courses = $courseModel->getAllCourses();  // 获取所有课程
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>CISC3003 | Home </title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="./public/css/style.css">
-    <!-- 新增课程列表专属样式 -->
     <style>
         .course-list {
             max-width: 1200px;
@@ -63,8 +61,6 @@ $courses = $courseModel->getAllCourses();  // 获取所有课程
 </head>
 
 <body>
-    <?php require_once './views/layouts/header.php' ?>
-
     <main>
         <section id="hero">
             <h1 class="visually-hidden">Course Management System</h1>
@@ -86,7 +82,7 @@ $courses = $courseModel->getAllCourses();  // 获取所有课程
                     </div>
                 <?php endforeach; ?>
             <?php else : ?>
-                <div class="no-courses">暂无课程数据</div>
+                <div class="no-courses">No Courses Found</div>
             <?php endif; ?>
         </section>
     </main>

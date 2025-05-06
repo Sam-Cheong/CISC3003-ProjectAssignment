@@ -29,7 +29,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
         <!-- Form submits to the Auth controller's processLogin action -->
-        <form method="post" action="Auth.php?action=login">
+        <form method="post" action="/CISC3003-ProjectAssignment/controllers/Auth.php?action=login">
             <!-- You could add a hidden input for action instead of using URL param if preferred -->
              <!-- <input type="hidden" name="action" value="processLogin"> -->
             <div class="form-group">

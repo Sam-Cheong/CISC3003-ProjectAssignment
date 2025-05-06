@@ -30,18 +30,18 @@ class Courses {
      * Displays the main course management page (list of courses and create/edit form).
      * Handles both the default view and showing the form pre-filled for editing.
      */
-    public function index(int $editId = null) {
+    public function index() {
         $courses = $this->courseModel->getAllCourses();
         $editCourse = null;
 
-        if ($editId !== null) {
-            $editCourse = $this->courseModel->getCourseById($editId);
-            if (!$editCourse) {
-                 $_SESSION['error'] = 'Course not found for editing.';
-                 header('Location: Courses.php?action=index');
-                 exit();
-            }
-        }
+        // if ($editId !== null) {
+        //     $editCourse = $this->courseModel->getCourseById($editId);
+        //     if (!$editCourse) {
+        //          $_SESSION['error'] = 'Course not found for editing.';
+        //          header('Location: Courses.php?action=index');
+        //          exit();
+        //     }
+        // }
 
         // Load the view, passing the necessary data ($courses, $editCourse)
         require_once __DIR__ . '/../views/manager/course.php';

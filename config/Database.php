@@ -85,4 +85,14 @@ class Database {
     public function rowCount(): int {
         return $this->stmt->rowCount();
     }
+
+    public function resultSet(): array {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function single(): mixed {
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_OBJ);
+    }
 }

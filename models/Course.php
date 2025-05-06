@@ -68,7 +68,7 @@ class Course {
             ORDER BY created_at DESC
         ');
         // Assuming resultSet returns an array of objects or an empty array
-        return $this->db->resultSet() ?: [];
+        return $this->db->getResults() ?: [];
     }
 
     /**
