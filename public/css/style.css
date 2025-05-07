@@ -164,6 +164,7 @@ main {
 
 .form-container {
     width: 450px;
+    height: fit-content;
     background-color: var(--primary-bg-color);
     display: flex;
     align-items: center;
@@ -373,239 +374,240 @@ main {
 .popular-course {
     color: #FFFFFF;
     border-radius: 20px;
-    background: linear-gradient(135deg, #578FCA, #86B3E3);
-    box-shadow: 20px 20px 40px #BEBEBE, -20px -20px 20px #FFFFFF;
+    background-color: #CCCCCC;
+    /* box-shadow: 20px 20px 40px #BEBEBE, -20px -20px 20px #FFFFFF; */
     padding: 20px;
     transition: 0.3s;
 }
 
-#manager-dashboard {
-    position: absolute;
-    right: 0;
-    width: calc(100% - 250px);
-    
-}
-
-/* General container styling for manager pages */
-.container {
-    margin: 20px auto;
-    padding: 20px;
-    background-color: var(--primary-bg-color);
-    border-radius: 10px;
-    box-shadow: var(--form-shadow);
-}
-
-/* Sidebar styling */
-.sidebar {
+aside {
     position: fixed;
     top: 80px;
-    width: 250px;
+    width: 300px;
+    padding: 40px;
     height: calc(100vh - 80px);
     background-color: var(--primary-bg-color);
     color: var(--primary-text-color);
-    padding: 20px;
-    border-radius: 10px;
-    /* box-shadow: var(--form-shadow); */
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .sidebar h2 {
     font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .side-links {
+    width: 100%;
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
 }
 
 .side-links li {
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    transition: var(--btn-hover);
 }
 
 .side-links a {
+    width: 100%;
     color: var(--primary-text-color);
+    padding: 20px 15px;
     text-decoration: none;
-    font-size: 1rem;
-    /* transition: var(--btn-hover); */
+    font-size: 18px;
+    border-radius: 10px;
+    transition: var(--btn-hover);
 }
 
 .side-links a:hover {
-    text-decoration: underline;
+    background-color: #2973B2;
+    color: var(--second-text-color);
 }
 
-/* Table styling */
-table {
+main#manager-dashboard,
+main#add-course {
+    position: absolute;
+    right: 0;
+    width: calc(100% - 300px);
+}
+
+.manage-header {
+    margin-bottom: 20px;
+}
+
+.btn a {
+    font-size: 18px;
+    color: var(--second-text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.add-course-btn {
+    width: fit-content;
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: var(--btn-hover);
+}
+
+.add-course-btn:hover {
+    background-color: #578FCA;
+}
+
+.courses-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-bottom: 20px;
     background-color: var(--primary-bg-color);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: var(--form-shadow);
 }
 
-th, td {
+.courses-table thead {
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+}
+
+.courses-table th, .courses-table td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-th {
-    background-color: var(--btn-color);
-    color: var(--second-text-color);
+.courses-table th {
     font-weight: bold;
 }
 
-tr:nth-child(even) {
+.courses-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-tr:hover {
+.courses-table tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-.container {
-    text-align: right;
-    margin-bottom: 20px;
+.courses-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
 }
 
-.container .btn-submit {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: var(--btn-color);
-    color: var(--second-text-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: var(--btn-hover);
+.courses-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
 }
 
-.container .btn-submit:hover {
-    background-color: #578FCA;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    color: var(--second-text-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: var(--btn-hover);
-}
-
-button[type="submit"]:hover {
-    background-color: #578FCA;
-}
-
-.btn-cancel {
-    display: inline-block;
-    margin-top: 10px;
-    text-align: center;
-    padding: 10px;
-    font-size: 1rem;
-    background-color: #6c757d;
-    color: var(--second-text-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: var(--btn-hover);
-}
-
-.btn-cancel:hover {
-    background-color: #5c636a;
-}
-
-/* Styled table */
-.styled-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    font-size: 16px;
-    text-align: left;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--form-shadow);
-}
-
-.styled-table th, .styled-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-}
-
-.styled-table th {
-    background-color: var(--btn-color);
-    color: var(--second-text-color);
-    font-weight: bold;
-}
-
-.styled-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.styled-table tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Buttons */
-.btn-add-course {
-    margin-bottom: 20px;
-    background-color: #198754;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-}
-
-.btn-add-course:hover {
-    background-color: #157347;
-}
-
-.btn-edit {
-    background-color: #0d6efd;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    margin-right: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-edit:hover {
-    background-color: #0b5ed7;
-}
-
-.btn-delete {
-    background-color: #dc3545;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-delete:hover {
-    background-color: #bb2d3b;
-}
-
-/* Action buttons container */
 .action-buttons {
     display: flex;
     gap: 10px;
+}
+
+.edit-course-btn {
+    background-color: #0d6efd;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.edit-course-btn:hover {
+    background-color: #0b5ed7;
+}
+
+.delete-course-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-course-btn:hover {
+    background-color: #c82333;
+}
+
+/* Add Course Form */
+main#add-course {
+    padding: 20px;
+}
+
+main#add-course h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--primary-text-color);
+}
+
+.add-course-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.add-course-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.add-course-form .form-label {
+    position: relative;
+    left: 0;
+    font-size: 18px;
+    padding: 0;
+    margin-bottom: 20px;
+    color: var(--primary-text-color);
+    cursor: pointer; /* Ensure labels are clickable */
+}
+
+.add-course-form .form-input {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.add-course-form .form-input:focus {
+    border-color: var(--btn-color);
+}
+
+.add-course-form textarea.form-input {
+    resize: none;
+    min-height: 100px;
+}
+
+.add-course-form .form-btn {
+    width: fit-content;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-course-form .form-btn:hover {
+    background-color: #578FCA;
 }
 
 @media screen and (max-width: 1200px) {}

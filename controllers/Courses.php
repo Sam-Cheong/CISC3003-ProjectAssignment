@@ -50,7 +50,7 @@ class Courses
         // Validate input
         if (empty($data['course_code']) || empty($data['course_name']) || empty($data['teacher']) || empty($data['schedule'])) {
             flash('error', 'All fields are required.', 'form-message form-message-red');
-            redirect('../views/manager/manage.php');
+            redirect('../views/manager/index.php');
         }
 
         // Create course
@@ -60,7 +60,7 @@ class Courses
             flash('error', 'Failed to create course. Course code might already exist.', 'form-message form-message-red');
         }
 
-        redirect('../views/manager/manage.php');
+        redirect('../views/manager/index.php');
     }
 
     /**
@@ -92,7 +92,7 @@ class Courses
             flash('error', 'Failed to update course.', 'form-message form-message-red');
         }
 
-        redirect('../views/manager/manage.php');
+        redirect('../views/manager/index.php');
     }
 
     /**
@@ -115,7 +115,7 @@ class Courses
             flash('error', 'Failed to delete course.', 'form-message form-message-red');
         }
 
-        redirect('../views/manager/manage.php');
+        redirect('../views/manager/index.php');
     }
 }
 
@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $init->delete();
             break;
         default:
-            redirect('../views/manager/manage.php');
+            redirect('../views/manager/index.php');
     }
 } else {
     $init->index();
