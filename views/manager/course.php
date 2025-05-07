@@ -54,7 +54,7 @@ $user_name = $_SESSION['username'] ?? 'Manager'; // Get username for display
         <?php if ($editCourse): ?>
         <div class="course-form">
             <h2>Edit Course</h2>
-            <form method="post" action="Courses.php">
+            <form method="post" action="../../controllers/Courses.php">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="course_id" value="<?= htmlspecialchars((string)($editCourse->course_id ?? '')) ?>">
 
@@ -90,7 +90,7 @@ $user_name = $_SESSION['username'] ?? 'Manager'; // Get username for display
         <?php else: ?>
         <div class="course-form">
             <h2>Create New Course</h2>
-            <form method="post" action="Courses.php">
+            <form method="post" action="../../controllers/Courses.php">
                  <input type="hidden" name="action" value="create">
                 <div class="form-group">
                     <label for="create_course_code">Course Code:</label>

@@ -66,7 +66,7 @@ a {
 }
 
 .nav-search input {
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 2px solid #c3c6ce;
     outline: none;
     width: 500px;
     padding: 10px 15px;
@@ -76,7 +76,7 @@ a {
 
 .nav-search input:focus {
     /* background-color: rgba(0, 0, 0, 0.05); */
-    border: 1px solid #578FCA;
+    border: 2px solid #578FCA;
     box-shadow: 10px 10px 10px #c5c5c5;
 }
 
@@ -123,8 +123,9 @@ a {
     left: 0;
     width: 0;
     height: 3px;
-    background-color: var(--btn-color);
+    background: linear-gradient(to right, var(--btn-color), var(--primary-text-color));
     transition: var(--btn-hover);
+    border-radius: 1.5px;
 }
 
 .nav-link:hover::after {
@@ -220,7 +221,7 @@ main {
 .form-group i {
     position: absolute;
     font-size: 16px;
-    padding: 0 5px;
+    padding: 0 3px;
     color: rgba(0, 0, 0, 0.5);
     transition: var(--btn-hover);
 }
@@ -237,9 +238,9 @@ main {
 
 .form-input:focus+.form-label,
 .form-input:not(:placeholder-shown)+.form-label {
-    background: local;
     background-color: #FFF;
-    transform: translateY(-20px);
+    font-size: 14px;
+    transform: translateY(-18px);
 }
 
 .form-btn {
@@ -296,7 +297,7 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    height: calc(100dvh - 160px);
+    height: calc(100dvh - 120px);
 }
 
 #hero .hero-left {

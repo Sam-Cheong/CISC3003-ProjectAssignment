@@ -17,7 +17,7 @@ require_once __DIR__ . '\..\..\helpers\session_helper.php';
     <header>
         <span class="nav-logo">
             <a href="/CISC3003-ProjectAssignment/index.php">
-                <img src="/CISC3003-ProjectAssignment/public/images/UMLogo.png" alt="Logo">
+                <img src="/CISC3003-ProjectAssignment/public/images/UMLogo.png" alt="Logo" draggable="false">
             </a>
         </span>
 
@@ -37,7 +37,7 @@ require_once __DIR__ . '\..\..\helpers\session_helper.php';
             <?php if (isset($_SESSION['userID'])): ?>
                 <li><a href="/CISC3003-ProjectAssignment/views/user/profile.php" class="nav-link">Profile</a></li>
                 <?php if (isset($_SESSION['roleID']) && $_SESSION['roleID'] === 2): ?>
-                    <li><a href="/CISC3003-ProjectAssignment/views/manager/manage_course.php">Manage</a></li>
+                    <li><a href="/CISC3003-ProjectAssignment/views/manager/manage_course.php" class="nav-link">Manage</a></li>
                 <?php endif ?>
                 <li><a href="/CISC3003-ProjectAssignment/controllers/Users.php?q=logout" class="nav-btn">Logout</a></li>
             <?php else: ?>

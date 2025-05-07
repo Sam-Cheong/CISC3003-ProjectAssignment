@@ -15,7 +15,7 @@ include __DIR__ . '/views/layouts/header.php';
                     <a href="./views/course/" class="btn-3d"><span>View Courses</span></a>
                 </div>
                 <div class="hero-right">
-                    <img src="./public/images/hero.jpg" alt="">
+                    <img src="./public/images/hero.jpg" alt="" draggable="false">
                 </div>
             </div>
         </section>
@@ -29,10 +29,14 @@ include __DIR__ . '/views/layouts/header.php';
                         <p>Time</p>
                     </div>
                     <div class="popular-course">
-                        <h2>Web</h2>
+                        <h2>Course Name</h2>
+                        <h3>Course Code</h3>
+                        <p>Time</p>
                     </div>
                     <div class="popular-course">
-                        <h2>Web</h2>
+                        <h2>Course Name</h2>
+                        <h3>Course Code</h3>
+                        <p>Time</p>
                     </div>
                 </div>
             </div>

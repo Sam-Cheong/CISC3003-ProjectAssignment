@@ -5,12 +5,21 @@ require_once __DIR__ . '/../../helpers/session_helper.php';
 
 if (isset($_SESSION['userID']) && isset($_SESSION['roleID'])) {
     if ($_SESSION['roleID'] !== 2) {
-        header('Location: /CISC3003-ProjectAssignment/index.php');
+        redirect("../../index.php");
         exit();
     }
 }
 
 require_once '../layouts/header.php';
+
+// --- Variable Checks ---
+// Ensure variables passed from the controller exist to avoid errors
+$courses = $courses ?? []; // Default to empty array if not set
+$editCourse = $editCourse ?? null; // Default to null if not set
+$formData = $_SESSION['form_data'] ?? []; // Get form data for repopulation
+if (isset($_SESSION['form_data'])) { unset($_SESSION['form_data']); } // Clear after use
+
+$user_name = $_SESSION['username'] ?? 'Manager'; // Get username for display
 ?>
     <main>
         <div class="container">
@@ -29,7 +38,7 @@ require_once '../layouts/header.php';
                 <div class="alert success"><?= $_SESSION['success']; unset($_SESSION['success']) ?></div>
             <?php endif; ?>
             <?php if ($editCourse): ?>
-            <form method="post" class="course-form">
+            <form method="post" action="../../controllers/Courses.php">
                 <h2>Edit Course</h2>
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="course_id" value="<?= $editCourse->course_id ?>">
