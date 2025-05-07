@@ -50,21 +50,21 @@ class Enrollments {
     }
 
     //Public Method
-    public function enroll() {
-        $enrollmentdata = $this->combineEnrollmentData();
-        if ($this->isComplete($enrollmentdata)) {
-            if ($this->enrollmentModel->createEnrollment($enrollmentdata)) {
-                flash('Enroll', 'Enrolled successfully.');
-                redirect('/CISC3003-ProjectAssignment/views/profile.php');
-            } else {
-                flash('Enroll', 'Course already enrolled.');
-                redirect('/CISC3003-ProjectAssignment/views/courses.php');
-            }
-        } else {
-            flash('Enroll', 'Enrollment failed.');
-            redirect('/CISC3003-ProjectAssignment/views/courses.php');
-        }
-    }
+    // public function enroll() {
+    //     $enrollmentdata = $this->combineEnrollmentData();
+    //     if ($this->isComplete($enrollmentdata)) {
+    //         if ($this->enrollmentModel->createEnrollment($enrollmentdata)) {
+    //             flash('Enroll', 'Enrolled successfully.');
+    //             redirect('/CISC3003-ProjectAssignment/views/profile.php');
+    //         } else {
+    //             flash('Enroll', 'Course already enrolled.');
+    //             redirect('/CISC3003-ProjectAssignment/views/courses.php');
+    //         }
+    //     } else {
+    //         flash('Enroll', 'Enrollment failed.');
+    //         redirect('/CISC3003-ProjectAssignment/views/courses.php');
+    //     }
+    // }
 
     public function remove(): void {
         $enrollmentdata = $this->combineEnrollmentData();
@@ -98,9 +98,9 @@ $enrollments = new Enrollments();
 $action = $_GET['action'] ?? '';
 
 switch ($action) {
-    case 'enroll':
-        $enrollments->enroll();
-        break;
+    // case 'enroll':
+    //     $enrollments->enroll();
+    //     break;
     case 'remove':
         $enrollments->remove();
         break;
