@@ -379,6 +379,235 @@ main {
     transition: 0.3s;
 }
 
+#manager-dashboard {
+    position: absolute;
+    right: 0;
+    width: calc(100% - 250px);
+    
+}
+
+/* General container styling for manager pages */
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--primary-bg-color);
+    border-radius: 10px;
+    box-shadow: var(--form-shadow);
+}
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    width: 250px;
+    height: calc(100vh - 80px);
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    padding: 20px;
+    border-radius: 10px;
+    /* box-shadow: var(--form-shadow); */
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.side-links {
+    list-style: none;
+    padding: 0;
+}
+
+.side-links li {
+    margin-bottom: 10px;
+}
+
+.side-links a {
+    color: var(--primary-text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    /* transition: var(--btn-hover); */
+}
+
+.side-links a:hover {
+    text-decoration: underline;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--primary-bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--form-shadow);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.container {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.container .btn-submit {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--btn-hover);
+}
+
+.container .btn-submit:hover {
+    background-color: #578FCA;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    color: var(--second-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--btn-hover);
+}
+
+button[type="submit"]:hover {
+    background-color: #578FCA;
+}
+
+.btn-cancel {
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #6c757d;
+    color: var(--second-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--btn-hover);
+}
+
+.btn-cancel:hover {
+    background-color: #5c636a;
+}
+
+/* Styled table */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--form-shadow);
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.styled-table th {
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+    font-weight: bold;
+}
+
+.styled-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.styled-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Buttons */
+.btn-add-course {
+    margin-bottom: 20px;
+    background-color: #198754;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-course:hover {
+    background-color: #157347;
+}
+
+.btn-edit {
+    background-color: #0d6efd;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+    background-color: #0b5ed7;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #bb2d3b;
+}
+
+/* Action buttons container */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
 @media screen and (max-width: 1200px) {}
 
 @media screen and (max-width: 768px) {
