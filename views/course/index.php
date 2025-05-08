@@ -8,34 +8,30 @@ require_once __DIR__ . '/../../models/Course.php';  // 新增引入课程模型
 $courseModel = new Course();
 $courses = $courseModel->getAllCourses();  // 获取所有课程
 ?>
-<body>
-    <main>
-        <section id="hero">
-            <h1 class="visually-hidden">Course Management System</h1>
-        </section>
-        <section class="course-list">
-            <?php if (!empty($courses)) : ?>
-                <?php foreach ($courses as $course) : ?>
-                    <div class="course-card">
-                        <div class="course-code"><?= htmlspecialchars($course->course_code) ?></div>
-                        <h3 class="course-name"><?= htmlspecialchars($course->course_name) ?></h3>
-                        <div class="course-teacher">
-                            <i class="ri-user-line"></i>
-                            <?= htmlspecialchars($course->teacher) ?>
-                        </div>
-                        <div class="course-schedule">
-                            <i class="ri-time-line"></i>
-                            <?= htmlspecialchars($course->schedule) ?>
-                        </div>
-                        <span class="course-btns">
-                            <a href= <?php echo "./detail.php?id=" . $course->course_id; ?> >View</a>
-                        </span>
-                    </div>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <div class="no-courses">No Courses Found</div>
-            <?php endif; ?>
-        </section>
-    </main>
-</body>
-</html>
+
+<main id="courses">
+    <h1>All Courses</h1>
+    <section class="course-container">
+        <?php if (!empty($courses)) : ?>
+            <?php foreach ($courses as $course) : ?>
+                <div class="course-card">
+                    <p class="course-name"><?= htmlspecialchars($course->course_name) ?></p>
+                    <p class="course-code"><?= htmlspecialchars($course->course_code) ?></p>
+                    <p class="course-teacher">
+                        <i class="ri-user-line"></i>
+                        <?= htmlspecialchars($course->teacher) ?>
+                    </p>
+                    <p class="course-schedule">
+                        <i class="ri-time-line"></i>
+                        <?= htmlspecialchars($course->schedule) ?>
+                    </p>
+                    <span class="course-btn">
+                        <a href= <?php echo "./detail.php?id=" . $course->course_id; ?> >View</a>
+                    </span>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <div class="no-courses">No Courses Found</div>
+        <?php endif; ?>
+    </section>
+</main>
