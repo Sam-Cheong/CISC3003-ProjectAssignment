@@ -107,13 +107,13 @@ class Enrollments {
                 $currentStatus = trim($update['currentStatus'] ?? '');
                 $newStatus = trim($update['newStatus'] ?? '');
                 
-                if ($enrollmentID <= 0 || empty($currentStatus) || empty($newStatus)) {
-                    continue;
-                }
-                // 可在此处添加额外逻辑判断（例如不允许直接从 pending 变到 finished）
-                if ($currentStatus === 'pending' && strtolower($newStatus) === 'finished') {
-                    continue;
-                }
+                // if ($enrollmentID <= 0 || empty($currentStatus) || empty($newStatus)) {
+                //     continue;
+                // }
+                // // 可在此处添加额外逻辑判断（例如不允许直接从 pending 变到 finished）
+                // if ($currentStatus === 'pending' && strtolower($newStatus) === 'finished') {
+                //     continue;
+                // }
                 $result = $this->enrollmentModel->updateStatus($enrollmentID, $newStatus);
                 if (!$result) {
                     $allSuccess = false;

@@ -12,7 +12,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['roleID'] != 2) {
 
 require_once __DIR__ . '/../../models/Enrollment.php';
 
-$enrollmentModel = new Enrollment();
+$enrollmentModel = new Enrollment;
 $enrollments = $enrollmentModel->getEnrollments();
 
 require_once __DIR__ . '\..\layouts\header.php';
@@ -90,5 +90,5 @@ require_once __DIR__ . '\..\layouts\header.php';
         </tbody>
     </table>
 </main>
-
+<script src="/CISC3003-ProjectAssignment/public/js/statuse-change.js"></script>
 <?php require_once '../layouts/footer.php'; ?>

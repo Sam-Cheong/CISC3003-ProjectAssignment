@@ -47,7 +47,7 @@ require_once '../layouts/header.php';
                                     <?= htmlspecialchars($course->schedule) ?>
                                 </div>
                                 <div class="course-btns">
-                                    <a href="/CISC3003-ProjectAssignment/views/course/detail.php?id=<?= htmlspecialchars($course->course_id); ?>" class="detail-btn">View Details</a>
+                                    <a href="/CISC3003-ProjectAssignment/views/course/detail.php?course_id=<?= htmlspecialchars($course->course_id); ?>" class="detail-btn">View Details</a>
                                 </div>
                             </div> 
                         <?php endforeach; ?>

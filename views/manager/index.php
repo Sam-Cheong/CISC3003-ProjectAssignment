@@ -12,7 +12,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['roleID'] != 2) {
 
 require_once __DIR__ . '/../../models/Course.php';
 
-$courseModel = new Course();
+$courseModel = new Course;
 $courses = $courseModel->getAllCourses();
 
 require_once __DIR__ . '\..\layouts\header.php';
