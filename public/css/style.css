@@ -444,6 +444,9 @@ main#add-course {
 
 .manage-header {
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .btn a {
@@ -510,6 +513,19 @@ main#add-course {
 .action-buttons {
     display: flex;
     gap: 10px;
+}
+
+.view-course-btn {
+    background-color: #3f9859;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.view-course-btn:hover {
+    background-color: #327647;
 }
 
 .edit-course-btn {
@@ -660,6 +676,15 @@ main#add-course h1 {
     transition: var(--btn-hover);
 }
 
+.finish-status-btn {
+    width: fit-content;
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: var(--btn-hover);
+}
+
 .download-enrollments-btn:hover {
     background-color: #578FCA;
 }
@@ -676,15 +701,15 @@ td.status-td {
 }
 
 td.pending {
-    background-color: #FFA500;  /* 橙色 */
+    background-color: #0d6efd;  
 }
 
 td.active {
-    background-color: #32CD32;  /* 酸橙绿 */
+    background-color: #dc3545;  
 }
 
 td.finished {
-    background-color: #A9A9A9;  /* 深灰 */
+    background-color: #A9A9A9; 
 }
 
 /* .unenroll-btn {
@@ -734,3 +759,20 @@ td.finished {
         flex-direction: column;
     }
 }
+
+/* <!-- filepath: c:\xampp\htdocs\CISC3003-ProjectAssignment\views\course\index.php -->
+<div class="course-card">
+    <div class="course-code"><?= htmlspecialchars($course->course_code) ?></div>
+    <h3 class="course-name"><?= htmlspecialchars($course->course_name) ?></h3>
+    <div class="course-teacher">
+        <i class="ri-user-line"></i>
+        <?= htmlspecialchars($course->teacher) ?>
+    </div>
+    <div class="course-schedule">
+        <i class="ri-time-line"></i>
+        <?= htmlspecialchars($course->schedule) ?>
+    </div>
+    <div class="course-btns">
+        <a href="/CISC3003-ProjectAssignment/views/course/detail.php?id=<?= htmlspecialchars($course->course_id); ?>" class="detail-btn">View Details</a>
+    </div>
+</div> */

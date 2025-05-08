@@ -35,6 +35,8 @@ require_once __DIR__ . '\..\layouts\header.php';
                 <i class="ri-printer-fill"></i> Download CSV
             </a>
         </div>
+        <!-- finish按钮，初始隐藏 -->
+        <button class="finish-status-btn btn" style="display:none;">Finish</button>
     </div>
     <table class="enrollments-table">
         <thead>
@@ -57,8 +59,17 @@ require_once __DIR__ . '\..\layouts\header.php';
                         <td><?= htmlspecialchars($enrollment->course_code) ?></td>
                         <td><?= htmlspecialchars($enrollment->course_name) ?></td>
                         <td><?= htmlspecialchars($enrollment->createdAt) ?></td>
-                        <td class="status-td <?php echo strtolower($enrollment->status); ?>">
-                            <?= htmlspecialchars(ucfirst($enrollment->status)) ?>
+                        <td class="status-td <?php echo strtolower($enrollment->status); ?>" data-id="<?= $enrollment->enrollmentID ?>">
+                            <!-- 下拉选择框，初始隐藏，由JS显示 -->
+                            <select class="status-dropdown" data-original="<?= htmlspecialchars($enrollment->status) ?>">
+                                <?php
+                                // 生成所有选项（包含当前状态）
+                                foreach (Enrollment::ALLOWED_STATUSES as $statusOption) {
+                                    $selected = (strtolower($statusOption) === strtolower($enrollment->status)) ? 'selected' : '';
+                                    echo '<option value="' . $statusOption . '" ' . $selected . '>' . ucfirst($statusOption) . '</option>';
+                                }
+                                ?>
+                            </select>
                         </td>
                         <!-- <td>
                             <div class="action-buttons">
@@ -79,3 +90,5 @@ require_once __DIR__ . '\..\layouts\header.php';
         </tbody>
     </table>
 </main>
+
+<?php require_once '../layouts/footer.php'; ?>

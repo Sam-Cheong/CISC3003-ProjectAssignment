@@ -92,27 +92,37 @@ class Enrollments {
         return $enrollments;
     }
 
-    public function updateStatusFlow($currentStatus, $newStatus): void {
-        // $allowedStatuses = ['pending', 'active', 'finished'];
+    public function updateStatusFlow(): void {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $enrollmentID = intval($_POST['enrollmentID'] ?? 0);
-            $currentStatus = trim($_POST['currentStatus'] ?? '');
-            
-            if ($enrollmentID <= 0 || empty($currentStatus)) {
-                flash('Update', 'Missing enrollment data.');
+            // 预期接收一个数组updates，其中键为 enrollmentID，每项包含 currentStatus 和 newStatus
+            $updates = $_POST['updates'] ?? [];
+            if (empty($updates)) {
+                flash('Update', 'No status changes submitted.');
                 redirect('/CISC3003-ProjectAssignment/views/manager/enrollments.php');
             }
             
-            // 根据当前状态决定新的状态
-            if ($currentStatus === 'pending' && $newStatus === 'finished') {
-                flash('Update', 'Cannot update status from the current state.');
-                redirect('/CISC3003-ProjectAssignment/views/manager/enrollments.php');
+            $allSuccess = true;
+            foreach ($updates as $update) {
+                $enrollmentID = intval($update['enrollmentID'] ?? 0);
+                $currentStatus = trim($update['currentStatus'] ?? '');
+                $newStatus = trim($update['newStatus'] ?? '');
+                
+                if ($enrollmentID <= 0 || empty($currentStatus) || empty($newStatus)) {
+                    continue;
+                }
+                // 可在此处添加额外逻辑判断（例如不允许直接从 pending 变到 finished）
+                if ($currentStatus === 'pending' && strtolower($newStatus) === 'finished') {
+                    continue;
+                }
+                $result = $this->enrollmentModel->updateStatus($enrollmentID, $newStatus);
+                if (!$result) {
+                    $allSuccess = false;
+                }
             }
-            
-            if ($this->enrollmentModel->updateStatus($enrollmentID, $newStatus)) {
-                flash('Update', "Enrollment status updated to {$newStatus}.");
+            if ($allSuccess) {
+                flash('Update', "Enrollment statuses updated successfully.");
             } else {
-                flash('Update', 'Status update failed.');
+                flash('Update', "Some status updates failed.");
             }
             redirect('/CISC3003-ProjectAssignment/views/manager/enrollments.php');
         } else {
@@ -131,6 +141,9 @@ switch ($action) {
     //     break;
     case 'remove':
         $enrollments->remove();
+        break;
+    case 'updateStatus':
+        $enrollments->updateStatusFlow();
         break;
     default:
         $enrollments->showAllEnrollments();
