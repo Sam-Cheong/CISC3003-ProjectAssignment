@@ -610,6 +610,86 @@ main#add-course h1 {
     background-color: #578FCA;
 }
 
+.enrollments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: var(--primary-bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--form-shadow);
+}
+
+.enrollments-table thead {
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+}
+
+.enrollments-table th, .enrollments-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.enrollments-table th {
+    font-weight: bold;
+}
+
+.enrollments-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.enrollments-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.enrollments-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.enrollments-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+td.status-td {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+td.pending {
+    background-color: #FFA500;  /* 橙色 */
+}
+
+td.active {
+    background-color: #32CD32;  /* 酸橙绿 */
+}
+
+td.finished {
+    background-color: #A9A9A9;  /* 深灰 */
+}
+
+/* .unenroll-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+} */
+
+.unenroll-btn:hover {
+    background-color: #c82333;
+}
+
 @media screen and (max-width: 1200px) {}
 
 @media screen and (max-width: 768px) {

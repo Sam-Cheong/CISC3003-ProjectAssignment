@@ -68,11 +68,11 @@ CREATE TABLE
 
 -- -- 插入普通用户 Alice（roleID = 3），密码为 "password123"
 -- INSERT INTO users (userName, userEmail, userPwd, roleID)
--- VALUES ('alice', 'alice@example.com', '$2y$10$wJST7Q7V/vR7sT.lQ.nLUu7A.TF6Ea5je0Zr2fN3vApR2t1mv6Bxu', 3);
+-- VALUES ('Alice', 'alice@example.com', '$2y$10$wJST7Q7V/vR7sT.lQ.nLUu7A.TF6Ea5je0Zr2fN3vApR2t1mv6Bxu', 3);
 
 -- -- 插入普通用户 Bob（roleID = 3），密码为 "mypassword"
 -- INSERT INTO users (userName, userEmail, userPwd, roleID)
--- VALUES ('bob', 'bob@example.com', '$2y$10$3LZk7cRFS0vbqC3L7BAnPeKCqRhwLk1yuuPrD5mBjEXwTknDxOj1a', 3);
+-- VALUES ('Bob', 'bob@example.com', '$2y$10$3LZk7cRFS0vbqC3L7BAnPeKCqRhwLk1yuuPrD5mBjEXwTknDxOj1a', 3);
 
 
 -- -- 示例 1：用户 1（manager）报名课程 2 (Math)，状态设置为 active

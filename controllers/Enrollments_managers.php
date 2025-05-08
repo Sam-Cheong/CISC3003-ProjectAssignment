@@ -1,14 +1,13 @@
 <?php
 require_once __DIR__ . '/../helpers/session_helper.php';
 require_once __DIR__ . '/../models/Enrollment.php';
-const permiteeID = 3;
+const permiteeID = 2;
 
 //僅允許已登入使用者操作
 if (!isset($_SESSION['userID'])) {
     redirect('/CISC3003-ProjectAssignment/views/login.php');
-}elseif(!$_SESSION['roleID']===permiteeID){
+} elseif ($_SESSION['roleID'] !== 2) {
     flash('Access Denied', 'You do not have permission to access this page.');
-    // redirect('/CISC3003-ProjectAssignment/views/manager/login.php');
     exit();
 }
 

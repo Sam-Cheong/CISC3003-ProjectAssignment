@@ -70,9 +70,10 @@ class Enrollment {
      */
     public function getEnrollments(): array {
         $this->db->query('
-            SELECT e.*, c.course_id, c.course_code, c.course_name, c.teacher, c.schedule
+            SELECT e.*, c.course_id, c.course_code, c.course_name, c.teacher, c.schedule, u.userName
             FROM enrollments e 
             JOIN courses c ON e.course_id = c.course_id
+            JOIN users u ON e.userID = u.userID
             ORDER BY e.enrollmentID DESC
         ');
         $enrollments = $this->db->resultSet();
