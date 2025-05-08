@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
 :root {
     /* Background Color */
@@ -25,7 +25,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Sansation', sans-serif;
 }
 
 body {
@@ -341,7 +341,6 @@ main {
     bottom: 0.4em;
     width: 8.25em;
     height: 2.5em;
-    /* background-color: #212121; */
     background: linear-gradient(90deg, #578FCA, #212121);
     border-radius: 0.2em;
     font-size: 1.5em;
@@ -351,13 +350,12 @@ main {
 }
 
 .btn-3d span:hover {
-    transition: all 0.5s;
     transform: translate(0, 0.4em);
     box-shadow: 0 0 0 0 #fff;
 }
 
 .btn-3d span:not(hover) {
-    transition: all 1s;
+    transition: all 0.5s;
 }
 
 #hero .hero-container .hero-right img {
@@ -436,7 +434,8 @@ aside {
 }
 
 main#manager-dashboard,
-main#add-course {
+main#add-course,
+main#edit-course {
     position: absolute;
     right: 0;
     width: calc(100% - 300px);
@@ -541,32 +540,28 @@ main#add-course {
     background-color: #c82333;
 }
 
-/* Add Course Form */
-main#add-course {
-    padding: 20px;
-}
-
-main#add-course h1 {
+main#add-course h1,
+main#edit-course h1 {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
     color: var(--primary-text-color);
 }
 
-.add-course-form {
+.course-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
 }
 
-.add-course-form .form-group {
+.course-form .form-group {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.add-course-form .form-label {
+.course-form .form-label {
     position: relative;
     left: 0;
     font-size: 18px;
@@ -576,7 +571,7 @@ main#add-course h1 {
     cursor: pointer; /* Ensure labels are clickable */
 }
 
-.add-course-form .form-input {
+.course-form .form-input {
     padding: 10px;
     font-size: 18px;
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -585,16 +580,16 @@ main#add-course h1 {
     transition: border-color 0.3s ease;
 }
 
-.add-course-form .form-input:focus {
+.course-form .form-input:focus {
     border-color: var(--btn-color);
 }
 
-.add-course-form textarea.form-input {
+.course-form textarea.form-input {
     resize: none;
     min-height: 100px;
 }
 
-.add-course-form .form-btn {
+.course-form .form-btn {
     width: fit-content;
     padding: 10px 20px;
     font-size: 1rem;
@@ -606,7 +601,7 @@ main#add-course h1 {
     transition: background-color 0.3s ease;
 }
 
-.add-course-form .form-btn:hover {
+.course-form .form-btn:hover {
     background-color: #578FCA;
 }
 
