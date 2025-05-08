@@ -12,7 +12,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['roleID'] != 2) {
 
 require_once __DIR__ . '/../../models/Course.php';
 
-$courseModel = new Course;
+$courseModel = new Course();
 $courses = $courseModel->getAllCourses();
 
 require_once __DIR__ . '\..\layouts\header.php';
@@ -20,7 +20,7 @@ require_once __DIR__ . '\..\layouts\header.php';
 
 <aside>
     <div class="sidebar">
-        <h2>Course Dashboard</h2>
+        <h2>Courses</h2>
         <ul class="side-links">
             <li><a href="/CISC3003-ProjectAssignment/views/manager/"><i class="ri-graduation-cap-line"></i> Courses</a></li>
             <li><a href="/CISC3003-ProjectAssignment/views/manager/enrollments.php"><i class="ri-school-line"></i> Enrollments</a></li>

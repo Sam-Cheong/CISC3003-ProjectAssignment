@@ -134,6 +134,18 @@ class Courses
         $courses = $this->courseModel->getCoursesByUser($userID);
         return $courses;
     }
+
+    /**
+     * Show courses managed by a specific manager.
+     *
+     * @param int $managerID The manager's user ID.
+     * @return array Returns an array of courses managed by the given manager.
+     */
+    public function showManagerCourses(int $managerID): array {
+        require_once __DIR__ . '/../models/Course.php';
+        $courseModel = new Course();
+        return $courseModel->getCoursesByManager($managerID);
+    }
 }
 
 // Initialize the controller
@@ -153,25 +165,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         default:
             redirect('../views/manager/index.php');
     } 
-    } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        if (isset($_GET['action']) && $_GET['action'] === 'showSelfCourses') {
-            // 获取当前用户ID
-            $userID = $_SESSION['userID'] ?? 0;
-            // 调用 showSelfCourses() 方法
-            $courses = $init->showSelfCourses($userID);
-            // 将结果传递到一个视图页面展示
-            require_once __DIR__ . '/../views/user/profile.php'; 
-            exit();
-        }elseif (isset($_GET['action']) && $_GET['action'] === 'showSelfCourses') {
-            // 获取当前用户ID
-            $userID = $_SESSION['userID'] ?? 0;
-            // 调用 showSelfCourses() 方法
-            $courses = $init->showSelfCourses($userID);
-            // 将结果传递到一个视图页面展示
-            require_once __DIR__ . '/../views/user/profile.php'; 
-            exit();
-        }
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['action']) && $_GET['action'] === 'showSelfCourses') {
+        // 获取当前用户ID
+        $userID = $_SESSION['userID'] ?? 0;
+        // 调用 showSelfCourses() 方法
+        $courses = $init->showSelfCourses($userID);
+        // 将结果传递到一个视图页面展示
+        require_once __DIR__ . '/../views/user/profile.php';
+        exit();
     }
-    else {
-        $init->index();
-    }
+} else {
+    $init->index();
+}

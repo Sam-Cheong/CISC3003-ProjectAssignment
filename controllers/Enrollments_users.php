@@ -1,112 +1,99 @@
 <?php
+// controllers/EnrollmentsUsers.php
+
 require_once __DIR__ . '/../helpers/session_helper.php';
 require_once __DIR__ . '/../models/Enrollment.php';
-require_once __DIR__ . '/../models/Course.php';
-const permiteeID = 3;
 
-//僅允許已登入使用者操作
-if (!isset($_SESSION['userID'])) {
-    redirect('/CISC3003-ProjectAssignment/views/login.php');
-} elseif ($_SESSION['roleID'] !== 3) {
-    flash('Access Denied', 'You do not have permission to access this page.');
-    exit();
-}
-/* 
-    $enrollmentdata = [
-        'userID'   => trim($_POST['userID']),
-        'course_code' => trim($_POST['course_code'])
-        'status' => ENUM('pending', 'confirmed', 'active', 'finished')
-    ];
+// ensure only logged-in customers (roleID = 3) get through
+verifyPermitee(3);
 
-    (array) enrollmentdata: 以array存儲的純數據，通常是尚未寫入數據庫的申請
-    (stdClass) enrollment: 以stdClass存儲的記錄，通常是從數據庫讀取的單一記錄
-    (array) enrollments: 以array存儲的記錄組合，通常是從數據庫讀取的一組記錄
-**/
-
-class Enrollments { 
-    private $enrollmentModel;
-    private $courseModel;
+class EnrollmentsUsers
+{
+    private Enrollment $enrollmentModel;
 
     public function __construct()
     {
         $this->enrollmentModel = new Enrollment();
-        $this->courseModel = new Course();
     }
 
-    private function isComplete(array $enrollmentdata): bool {
-        return (!empty($enrollmentdata['userID']) && !empty($enrollmentdata['course_code']));
+    /**
+     * Display the list of this user’s enrollments.
+     */
+    public function index(): void
+    {
+        $userID      = (int)($_SESSION['userID'] ?? 0);
+        $enrollments = $this->enrollmentModel->getEnrollmentsByUser($userID);
+        require_once __DIR__ . '/../views/user/enrollments.php';
     }
 
-    private function combineEnrollmentData(){
-        //需確保function不會被call第二次才能使用這個method
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $enrollmentdata = array(
-                'userID' => $_SESSION['userID'],
-                'course_code' => trim($_POST['course_code']),
-                'course_id' => $this->courseModel->getCourseIdByCode(trim($_POST['course_code'])),
-            );
-            return $enrollmentdata;
-        }else{
-            $enrollmentdata = null;
-            return null;}
-    }
+    /**
+     * Process an enroll-in-course POST.
+     */
+    public function enroll(): void
+    {
+        $userID   = (int)($_SESSION['userID'] ?? 0);
+        $courseID = filter_input(INPUT_POST, 'course_id', FILTER_VALIDATE_INT);
 
-    //Public Method
-    public function enroll() {
-        $enrollmentdata = $this->combineEnrollmentData();
-        if ($this->isComplete($enrollmentdata)) {
-            if ($this->enrollmentModel->createEnrollment($enrollmentdata)) {
-                flash('Enroll', 'Enrolled successfully.');
-                redirect('/CISC3003-ProjectAssignment/views/user/profile.php');
-            } else {
-                flash('Enroll', 'Course already enrolled.');
-                redirect('/CISC3003-ProjectAssignment/views/course/detail.php?course_id=' . $enrollmentdata['course_id']);
-            }
+        if (!$courseID) {
+            flash('error', 'Invalid course selection.');
+            redirect("/CISC3003-ProjectAssignment/views/course/detail.php?course_id={$courseID}");
+        }
+
+        // createEnrollment should return false if already enrolled
+        $ok = $this->enrollmentModel->createEnrollment([
+            'userID'    => $userID,
+            'course_id' => $courseID
+        ]);
+
+        if ($ok) {
+            flash('success', 'You have been enrolled successfully.', "form-message form-message-green");
+            redirect("/CISC3003-ProjectAssignment/views/user/profile.php");
         } else {
-            flash('Enroll', 'Enrollment failed.');
-            redirect('/CISC3003-ProjectAssignment/views/course/');
-        }
+            flash('error', 'You are already enrolled in this course.');
+            redirect("/CISC3003-ProjectAssignment/views/course/detail.php" . "?course_id={$courseID}");
+        }        
     }
 
-    public function remove(): void {
-        $enrollmentdata = $this->combineEnrollmentData();
-        if ($enrollmentdata === null || !$this->isComplete($enrollmentdata)) {
-            flash('Remove', 'Removal failed: Missing required data.');
-            redirect('/CISC3003-ProjectAssignment/views/profile.php');
+    public function cancel(): void
+    {
+        // validate input
+        $eid = filter_input(INPUT_POST, 'enrollment_id', FILTER_VALIDATE_INT);
+        if (!$eid) {
+            flash('cancel', 'Invalid enrollment ID.', 'form-message form-message-red');
+            redirect('/CISC3003-ProjectAssignment/views/user/profile.php');
         }
 
-        $enrollment = $this->enrollmentModel->isExist($enrollmentdata);
-        if ($enrollment) {
-            if ($this->enrollmentModel->removeEnrollment($enrollment)) {
-                flash('Remove', 'Removed successfully.');
-                redirect('/CISC3003-ProjectAssignment/views/profile.php');
-            } else {
-                flash('Remove', 'Removal failed.');
-                redirect('/CISC3003-ProjectAssignment/views/profile.php');
-            }
+        // pass an object with enrollmentID to the model
+        $enrollment       = new stdClass();
+        $enrollment->enrollmentID = $eid;
+        $ok = $this->enrollmentModel->removeEnrollment($enrollment);
+
+        if ($ok) {
+            flash('cancel', 'Enrollment cancelled.', 'form-message form-message-green');
         } else {
-            flash('Remove', 'Enrollment does not exist.');
-            redirect('/CISC3003-ProjectAssignment/views/profile.php');
+            flash('cancel', 'Failed to cancel enrollment.', 'form-message form-message-red');
         }
-    }
 
-    public function showSelfEnrollments() {
-        $enrollments = $this->enrollmentModel->getEnrollmentsByUser($_SESSION['userID']);
-        return $enrollments;
+        redirect('/CISC3003-ProjectAssignment/views/user/profile.php');
     }
 }
 
-$enrollments = new Enrollments();
-$action = $_GET['action'] ?? '';
+$controller = new EnrollmentsUsers();
 
-switch ($action) {
-    case 'enroll':
-        $enrollments->enroll();
-        break;
-    case 'remove':
-        $enrollments->remove();
-        break;
-    default:
-        $enrollments->showSelfEnrollments();
-        break;
+// route POST→enroll(), otherwise GET→index()
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    switch ($_POST['action'] ?? '') {
+        case 'enroll':
+            $controller->enroll();
+            break;
+        case 'cancel':
+            $controller->cancel();
+            break;
+        default:
+            flash('error', 'Invalid action.', 'form-message form-message-red');
+            redirect('/CISC3003-ProjectAssignment/views/course/detail.php?course_id=' . $_POST['course_id']);
+            break;
+    }       
+} else {
+    $controller->index();
 }

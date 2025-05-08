@@ -383,6 +383,7 @@ main {
 #courses h1 {
     margin-bottom: 40px;
 }
+
 .course-container {
     display: grid;
     max-width: 1200px;
@@ -461,6 +462,7 @@ aside {
 }
 
 .sidebar h2 {
+    width: 100%;
     font-size: 1.5rem;
     margin-bottom: 40px;
 }
@@ -544,7 +546,8 @@ main#edit-course {
     color: var(--second-text-color);
 }
 
-.courses-table th, .courses-table td {
+.courses-table th,
+.courses-table td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -634,7 +637,8 @@ main#edit-course h1 {
     padding: 0;
     margin-bottom: 20px;
     color: var(--primary-text-color);
-    cursor: pointer; /* Ensure labels are clickable */
+    cursor: pointer;
+    /* Ensure labels are clickable */
 }
 
 .course-form .form-input {
@@ -686,7 +690,8 @@ main#edit-course h1 {
     color: var(--second-text-color);
 }
 
-.enrollments-table th, .enrollments-table td {
+.enrollments-table th,
+.enrollments-table td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -721,56 +726,197 @@ main#edit-course h1 {
     transition: var(--btn-hover);
 }
 
-.finish-status-btn {
+.status-form {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+.status-form .form-input {
     width: fit-content;
-    background-color: var(--btn-color);
+}
+
+.status-form .form-btn {
+    background-color: #0d6efd;
+    width: fit-content;
+}
+
+.profile-page {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Profile Info Card */
+.profile-page .profile-info {
+    background: var(--primary-bg-color);
+    border-radius: 8px;
+    box-shadow: var(--form-shadow);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.profile-page .profile-info h2 {
+    margin-bottom: 1rem;
+    color: var(--primary-text-color);
+    font-size: 1.75rem;
+}
+
+.profile-page .profile-info p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.profile-page .profile-info p strong {
+    color: var(--btn-color);
+}
+
+/* Enrollments / Courses Table */
+.profile-page .records {
+    background: var(--primary-bg-color);
+    border-radius: 8px;
+    box-shadow: var(--form-shadow);
+    padding: 1.5rem 2rem;
+}
+
+.profile-page .records h2 {
+    margin-bottom: 1rem;
+    color: var(--primary-text-color);
+    font-size: 1.75rem;
+}
+
+/* table wrapper to allow horizontal scroll on small screens */
+.profile-page .records .table-wrapper {
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+.profile-page table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profile-page th,
+.profile-page td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.profile-page thead {
+    background-color: #2973B2;
+}
+
+.profile-page th {
+    font-weight: 600;
     color: var(--second-text-color);
-    padding: 12px 15px;
-    border-radius: 10px;
+}
+
+.profile-page tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.profile-page tbody tr:hover {
+    background: #f5f5f5;
+}
+
+/* No-records message */
+.profile-page .records p {
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+/* Action buttons (if any) */
+.profile-page .button {
+    margin-top: 1rem;
+    background: var(--btn-color);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 0.9rem;
     transition: var(--btn-hover);
 }
 
-.download-enrollments-btn:hover {
-    background-color: #578FCA;
+.profile-page .button:hover {
+    background: #1f5a8a;
+    /* darker shade */
 }
 
-td.status-td {
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 18px;
-    text-decoration: none;
+.course-detail {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--primary-bg-color);
+    border-radius: 8px;
+    box-shadow: var(--form-shadow);
+}
+
+.course-detail h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-text-color);
+    text-align: center;
+}
+
+/* each row: label on left, value on right */
+.course-detail p {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    justify-content: space-between;
+}
+
+.course-detail p strong {
+    text-align: right;
+    width: 150px;
+    flex-shrink: 0;
+    color: var(--btn-color);
+}
+
+/* action area */
+.course-detail .course-actions {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+/* button styling */
+.course-detail .btn-enroll {
+    background: var(--btn-color);
+    color: #fff;
     border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: var(--btn-hover);
 }
 
-td.pending {
-    background-color: #0d6efd;  
+.course-detail .btn-enroll:hover {
+    background: #1f5a8a;
+    /* a slightly darker shade */
 }
 
-td.active {
-    background-color: #dc3545;  
-}
-
-td.finished {
-    background-color: #A9A9A9; 
-}
-
-/* .unenroll-btn {
-    background-color: #dc3545;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 18px;
-    text-decoration: none;
+.profile-page .cancel-btn {
+    background: #dc3545;
+    color: #fff;
     border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-} */
+    transition: var(--btn-hover);
+}
 
-.unenroll-btn:hover {
-    background-color: #c82333;
+.profile-page .cancel-btn:hover {
+    background: #c82333;
 }
 
 @media screen and (max-width: 1200px) {}
@@ -804,22 +950,3 @@ td.finished {
         flex-direction: column;
     }
 }
-
-/* Course card for manager */
-/* <!-- filepath: c:\xampp\htdocs\CISC3003-ProjectAssignment\views\course\index.php -->
-<div class="course-card">
-    <div class="course-code"><?= htmlspecialchars($course->course_code) ?></div>
-    <h3 class="course-name"><?= htmlspecialchars($course->course_name) ?></h3>
-    <div class="course-teacher">
-        <i class="ri-user-line"></i>
-        <?= htmlspecialchars($course->teacher) ?>
-    </div>
-    <div class="course-schedule">
-        <i class="ri-time-line"></i>
-        <?= htmlspecialchars($course->schedule) ?>
-    </div>
-    <div class="course-btns">
-        <a href="/CISC3003-ProjectAssignment/views/course/detail.php?id=<?= htmlspecialchars($course->course_id); ?>" class="detail-btn">View Details</a>
-    </div>
-</div> 
-*/

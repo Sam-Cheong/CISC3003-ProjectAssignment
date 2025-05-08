@@ -1,12 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 当点击任一状态单元格时显示下拉框
-    // document.querySelectorAll("td.status-td").forEach(td => {
-    //     td.addEventListener("click", function(e){
-    //         let dropdown = this.querySelector("select.status-dropdown");
-    //         dropdown.style.display = "inline-block";
-    //     });
-    // });
-
     // 给所有的下拉框绑定change事件，判断是否有任何值发生变化
     document.querySelectorAll("select.status-dropdown").forEach(select => {
         // 存储初始值（已有data-original属性也可作为参考）
@@ -37,21 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 const td = select.closest("td.status-td");
                 const enrollmentID = td.getAttribute("data-id");
 
-                // 输入： enrollmentID
                 const inputEnrollment = document.createElement("input");
                 inputEnrollment.type = "hidden";
                 inputEnrollment.name = "updates[" + enrollmentID + "][enrollmentID]";
                 inputEnrollment.value = enrollmentID;
                 form.appendChild(inputEnrollment);
 
-                // 输入： 当前状态（原始）
                 const inputCurrent = document.createElement("input");
                 inputCurrent.type = "hidden";
                 inputCurrent.name = "updates[" + enrollmentID + "][currentStatus]";
                 inputCurrent.value = select.dataset.original;
                 form.appendChild(inputCurrent);
 
-                // 输入： 新状态
                 const inputNew = document.createElement("input");
                 inputNew.type = "hidden";
                 inputNew.name = "updates[" + enrollmentID + "][newStatus]";

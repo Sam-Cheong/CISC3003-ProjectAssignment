@@ -41,7 +41,7 @@ require_once __DIR__ . '/../layouts/header.php';
         <input type="hidden" name="course_id" value="<?= htmlspecialchars($course->course_id) ?>">
         <div class="form-group">
             <label class="form-label" for="course_code" class="form-label">Course Code</label>
-            <input class="form-input" type="text" id="course_code" name="course_code" class="form-input" value="<?= htmlspecialchars($course->course_code) ?>" readonly>
+            <input class="form-input" type="text" id="course_code" name="course_code" class="form-input" value="<?= htmlspecialchars($course->course_code) ?>">
         </div>
         <div class="form-group">
             <label class="form-label" for="course_name" class="form-label">Course Name</label>

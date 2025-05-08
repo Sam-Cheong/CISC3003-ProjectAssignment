@@ -186,4 +186,21 @@ class Course {
             return false;
         }
     }
+
+    /**
+     * Get courses managed by a specific manager.
+     *
+     * @param int $managerID The manager's user ID.
+     * @return array Returns an array of courses managed by the given manager.
+     */
+    public function getCoursesByManager(int $managerID): array {
+        $this->db->query('
+            SELECT course_id, course_code, course_name, teacher, schedule, description, created_at
+            FROM courses
+            WHERE manager_id = :managerID
+            ORDER BY created_at DESC
+        ');
+        $this->db->bind(':managerID', $managerID);
+        return $this->db->getResults() ?: [];
+    }
 }
