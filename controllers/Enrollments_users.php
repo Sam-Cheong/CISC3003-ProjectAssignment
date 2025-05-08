@@ -60,7 +60,7 @@ class Enrollments {
                 redirect('/CISC3003-ProjectAssignment/views/user/profile.php');
             } else {
                 flash('Enroll', 'Course already enrolled.');
-                redirect('/CISC3003-ProjectAssignment/views/course/detail.php?id=' . $enrollmentdata['course_id']);
+                redirect('/CISC3003-ProjectAssignment/views/course/detail.php?course_id=' . $enrollmentdata['course_id']);
             }
         } else {
             flash('Enroll', 'Enrollment failed.');
