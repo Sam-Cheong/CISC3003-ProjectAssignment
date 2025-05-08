@@ -6,12 +6,10 @@ const permiteeID = 3;
 //僅允許已登入使用者操作
 if (!isset($_SESSION['userID'])) {
     redirect('/CISC3003-ProjectAssignment/views/login.php');
-}elseif(!$_SESSION['roleID']===permiteeID){
+} elseif ($_SESSION['roleID'] !== 3) {
     flash('Access Denied', 'You do not have permission to access this page.');
-    // redirect('/CISC3003-ProjectAssignment/views/manager/login.php');
     exit();
 }
-
 /* 
     $enrollmentdata = [
         'userID'   => trim($_POST['userID']),
@@ -62,7 +60,7 @@ class Enrollments {
             }
         } else {
             flash('Enroll', 'Enrollment failed.');
-            redirect('/CISC3003-ProjectAssignment/views/courses.php');
+            redirect('/CISC3003-ProjectAssignment/views/course/');
         }
     }
 

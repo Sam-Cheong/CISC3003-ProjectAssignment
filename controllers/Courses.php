@@ -9,19 +9,19 @@ class Courses
     public function __construct()
     {
         $this->courseModel = new Course();
-        $this->checkAuth(); // Ensure only managers can access
+        // $this->checkAuth(); // Ensure only managers can access
     }
 
     /**
      * Check if the user is logged in and is a manager.
      */
-    private function checkAuth()
-    {
-        if (!isset($_SESSION['userID']) || $_SESSION['roleID'] != 2) {
-            flash('error', 'Unauthorized access.', 'form-message form-message-red');
-            redirect('../../index.php');
-        }
-    }
+    // private function checkAuth()
+    // {
+    //     if (!isset($_SESSION['userID']) || $_SESSION['roleID'] != 2) {
+    //         flash('error', 'Unauthorized access.', 'form-message form-message-red');
+    //         redirect('../../index.php');
+    //     }
+    // }
 
     /**
      * Display the course management page.
@@ -117,6 +117,23 @@ class Courses
 
         redirect('../views/manager/index.php');
     }
+
+    public function showAllCourses()
+    {
+        $courses = $this->courseModel->getAllCourses();
+        return $courses;
+    }
+
+    /**
+     * 获取当前用户的课程（报名的课程详情）。
+     *
+     * @param int $userID 当前用户ID
+     * @return array 返回包含课程详情的数组
+     */
+    public function showSelfCourses(int $userID): array {
+        $courses = $this->courseModel->getCoursesByUser($userID);
+        return $courses;
+    }
 }
 
 // Initialize the controller
@@ -135,7 +152,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         default:
             redirect('../views/manager/index.php');
+    } 
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (isset($_GET['action']) && $_GET['action'] === 'showSelfCourses') {
+            // 获取当前用户ID
+            $userID = $_SESSION['userID'] ?? 0;
+            // 调用 showSelfCourses() 方法
+            $courses = $init->showSelfCourses($userID);
+            // 将结果传递到一个视图页面展示
+            require_once __DIR__ . '/../views/user/profile.php'; 
+            exit();
+        }elseif (isset($_GET['action']) && $_GET['action'] === 'showSelfCourses') {
+            // 获取当前用户ID
+            $userID = $_SESSION['userID'] ?? 0;
+            // 调用 showSelfCourses() 方法
+            $courses = $init->showSelfCourses($userID);
+            // 将结果传递到一个视图页面展示
+            require_once __DIR__ . '/../views/user/profile.php'; 
+            exit();
+        }
     }
-} else {
-    $init->index();
-}
+    else {
+        $init->index();
+    }

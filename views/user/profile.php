@@ -1,16 +1,23 @@
 <?php
 
 require_once __DIR__ . '/../../helpers/session_helper.php';
-isPermitee(2,3);
 
 if($_SESSION['roleID'] === 2) {
     require_once __DIR__ . '/../../controllers/Enrollments_managers.php';
     $enrollmentscontroller = new Enrollments();
     $enrollments = $enrollmentscontroller->showAllEnrollments();
+
+    require_once __DIR__ . '/../../controllers/Courses.php';
+    $coursescontroller = new Courses();
+    $userCourses = $coursescontroller->showAllCourses($_SESSION['userID']);
 }elseif($_SESSION['roleID'] === 3) {
     require_once __DIR__ . '/../../controllers/Enrollments_users.php';
     $enrollmentscontroller = new Enrollments();
     $enrollments = $enrollmentscontroller->showSelfEnrollments();
+    
+    require_once __DIR__ . '/../../controllers/Courses.php';
+    $coursescontroller = new Courses();
+    $userCourses = $coursescontroller->showSelfCourses($_SESSION['userID']);
 }
 
 require_once '../layouts/header.php';
@@ -24,7 +31,7 @@ require_once '../layouts/header.php';
                 <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['email']) ?></p>
             </div>
             <div class="profile-courses">
-                <h2 class="subtitle">My Courses</h2>
+                <h2 class="subtitle">Courses</h2>
                 <?php if (!empty($userCourses)) : ?>
                     <div class="course-list">
                         <?php foreach ($userCourses as $course) : ?>

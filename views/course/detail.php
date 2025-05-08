@@ -25,6 +25,13 @@ if (!$course) {
         <?php if (isset($course->description) && !empty($course->description)) : ?>
             <p class="course-description"><strong>Description:</strong> <?= htmlspecialchars($course->description) ?></p >
         <?php endif; ?>
+        <!-- filepath: c:\xampp\htdocs\CISC3003-ProjectAssignment\views\course\detail.php -->
+        <div class="course-actions">
+            <form action="/CISC3003-ProjectAssignment/controllers/Enrollments_users.php?action=enroll" method="post">
+                <input type="hidden" name="course_code" value="<?= htmlspecialchars($course->course_code) ?>">
+                <button type="submit" class="btn-enroll">Enroll in Course</button>
+            </form>
+        </div>
     </section>
 </main>
 

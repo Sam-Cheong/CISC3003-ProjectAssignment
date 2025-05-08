@@ -71,6 +71,18 @@ class Course {
         return $this->db->getResults() ?: [];
     }
 
+    public function getCoursesByUser(int $userID): array {
+        $this->db->query('
+            SELECT c.course_id, c.course_code, c.course_name, c.teacher, c.schedule, c.description, c.created_at -- Added description
+            FROM courses c
+            JOIN enrollments e ON c.course_id = e.course_id
+            WHERE e.userID = :uid
+            ORDER BY c.created_at DESC
+        ');
+        $this->db->bind(':uid', $userID);
+        return $this->db->getResults() ?: [];
+    }
+
     // 在合适位置（比如 getAllCourses 方法后面）添加：
     public function searchCourses(string $keyword): array {
         $this->db->query('

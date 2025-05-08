@@ -60,7 +60,7 @@ function isPermitee($permiteeID) {
     return $permiteeID === $_SESSION['roleID'];
 }
 
-function verifyPermitee(int $permiteeID, ?int $anotherPermiteeID) {
+function verifyPermitee(int $permiteeID, ?int $anotherPermiteeID = null) {
     if (!isLoggedIn()) {
         redirect('/CISC3003-ProjectAssignment/views/login.php');
     } elseif ($_SESSION['roleID'] != $permiteeID && $_SESSION['roleID'] != $anotherPermiteeID) {

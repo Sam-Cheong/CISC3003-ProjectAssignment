@@ -12,6 +12,7 @@ class Enrollment {
     public function __destruct() {
         $this->db = null;
     }
+    
     public function isExist(array $enrollmentdata){
         if($enrollmentdata['enrollmentID'] != null) {
             // select by enrollmentID
