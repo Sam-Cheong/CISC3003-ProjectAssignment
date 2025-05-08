@@ -378,6 +378,70 @@ main {
     transition: 0.3s;
 }
 
+/* All Courses Page */
+
+#courses h1 {
+    margin-bottom: 40px;
+}
+.course-container {
+    display: grid;
+    max-width: 1200px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 40px;
+    grid-row-gap: 40px;
+    margin: 0 auto;
+}
+
+.course-card {
+    min-height: 200px;
+    color: var(--primary-text-color);
+    background-color: var(--primary-bg-color);
+    padding: 20px;
+    border: 2px solid #2973B2;
+    border-radius: 20px;
+    box-shadow: var(--form-shadow);
+    transition: all 0.3s ease;
+}
+
+.course-card p {
+    margin-bottom: 15px;
+}
+
+p.course-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.course-code {
+    opacity: 0.7;
+}
+
+.course-btn {
+    display: flex;
+    width: fit-content;
+    padding: 10px 15px;
+    border: 2px solid #2973B2;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.course-btn:hover {
+    background-color: #2973B2;
+    transition: var(--btn-hover);
+}
+
+.course-btn a {
+    color: var(--primary-text-color);
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+.course-btn:hover a {
+    opacity: 1;
+    color: #FFFFFF;
+}
+
 aside {
     position: fixed;
     top: 80px;
@@ -443,9 +507,6 @@ main#edit-course {
 
 .manage-header {
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .btn a {
@@ -512,19 +573,6 @@ main#edit-course {
 .action-buttons {
     display: flex;
     gap: 10px;
-}
-
-.view-course-btn {
-    background-color: #3f9859;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.view-course-btn:hover {
-    background-color: #327647;
 }
 
 .edit-course-btn {
@@ -671,15 +719,6 @@ main#edit-course h1 {
     transition: var(--btn-hover);
 }
 
-.finish-status-btn {
-    width: fit-content;
-    background-color: var(--btn-color);
-    color: var(--second-text-color);
-    padding: 12px 15px;
-    border-radius: 10px;
-    transition: var(--btn-hover);
-}
-
 .download-enrollments-btn:hover {
     background-color: #578FCA;
 }
@@ -696,15 +735,15 @@ td.status-td {
 }
 
 td.pending {
-    background-color: #0d6efd;  
+    background-color: #FFA500;  /* 橙色 */
 }
 
 td.active {
-    background-color: #dc3545;  
+    background-color: #32CD32;  /* 酸橙绿 */
 }
 
 td.finished {
-    background-color: #A9A9A9; 
+    background-color: #A9A9A9;  /* 深灰 */
 }
 
 /* .unenroll-btn {
@@ -754,20 +793,3 @@ td.finished {
         flex-direction: column;
     }
 }
-
-/* <!-- filepath: c:\xampp\htdocs\CISC3003-ProjectAssignment\views\course\index.php -->
-<div class="course-card">
-    <div class="course-code"><?= htmlspecialchars($course->course_code) ?></div>
-    <h3 class="course-name"><?= htmlspecialchars($course->course_name) ?></h3>
-    <div class="course-teacher">
-        <i class="ri-user-line"></i>
-        <?= htmlspecialchars($course->teacher) ?>
-    </div>
-    <div class="course-schedule">
-        <i class="ri-time-line"></i>
-        <?= htmlspecialchars($course->schedule) ?>
-    </div>
-    <div class="course-btns">
-        <a href="/CISC3003-ProjectAssignment/views/course/detail.php?id=<?= htmlspecialchars($course->course_id); ?>" class="detail-btn">View Details</a>
-    </div>
-</div> */
