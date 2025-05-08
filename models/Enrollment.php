@@ -3,6 +3,7 @@ require_once __DIR__ . '/../config/Database.php';
 
 class Enrollment {
     private $db;
+    public const ALLOWED_STATUSES = ['pending', 'active', 'finished'];
 
     public function __construct() {
         $this->db = new Database();
@@ -11,7 +12,7 @@ class Enrollment {
     public function __destruct() {
         $this->db = null;
     }
-    public function exist(array $enrollmentdata){
+    public function isExist(array $enrollmentdata){
         if($enrollmentdata['enrollmentID'] != null) {
             // select by enrollmentID
             $this->db->query("SELECT enrollmentID FROM enrollments WHERE enrollmentID = :enrollmentID");
@@ -37,7 +38,7 @@ class Enrollment {
      */
     public function createEnrollment(array $enrollmentdata): bool {
         // Check if the user is already enrollmented in the course.
-        if ($this->exist($enrollmentdata)) {
+        if ($this->isExist($enrollmentdata)) {
             // Already enrollmented.
             return false;
             // enrollment conflict
@@ -110,5 +111,38 @@ class Enrollment {
         $this->db->bind(':cid', $course_id);
         $enrollments = $this->db->resultSet();
         return $enrollments;
+    }
+
+        /**
+     * Update the status of an enrollment.
+     *
+     * @param int    $enrollmentID The enrollment record identifier.
+     * @param string $newStatus    The new status ('pending', 'active', 'finished').
+     * @return bool Returns true on success, false on failure.
+     */
+    public function updateStatus(int $enrollmentID, string $newStatus): bool {
+        // 验证新状态是否在允许的枚举值中
+        $allowedStatuses = ['pending', 'active', 'finished'];
+        if (!in_array($newStatus, $allowedStatuses, true)) {
+            error_log("updateStatus: Invalid status '{$newStatus}' for enrollment ID {$enrollmentID}");
+            return false;
+        }
+
+        $sql = "UPDATE enrollments SET status = :status WHERE enrollmentID = :eid";
+        $this->db->query($sql);
+        $this->db->bind(':status', $newStatus);
+        $this->db->bind(':eid', $enrollmentID, PDO::PARAM_INT);
+
+        try {
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                error_log("Failed to update status for enrollment ID {$enrollmentID}");
+                return false;
+            }
+        } catch (PDOException $e) {
+            error_log("Database Error during status update for enrollment ID {$enrollmentID}: " . $e->getMessage());
+            return false;
+        }
     }
 }

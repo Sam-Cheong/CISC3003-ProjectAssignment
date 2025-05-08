@@ -73,7 +73,7 @@ class Enrollments {
             redirect('/CISC3003-ProjectAssignment/views/profile.php');
         }
 
-        $enrollment = $this->enrollmentModel->exist($enrollmentdata);
+        $enrollment = $this->enrollmentModel->isExist($enrollmentdata);
         if ($enrollment) {
             if ($this->enrollmentModel->removeEnrollment($enrollment)) {
                 flash('Remove', 'Removed successfully.');

@@ -72,7 +72,7 @@ class Enrollments {
             redirect('/CISC3003-ProjectAssignment/views/profile.php');
         }
 
-        $enrollment = $this->enrollmentModel->exist($enrollmentdata);
+        $enrollment = $this->enrollmentModel->isExist($enrollmentdata);
         if ($enrollment) {
             if ($this->enrollmentModel->removeEnrollment($enrollment)) {
                 flash('Remove', 'Removed successfully.');
@@ -90,6 +90,35 @@ class Enrollments {
     public function showAllEnrollments() {
         $enrollments = $this->enrollmentModel->getEnrollments();
         return $enrollments;
+    }
+
+    public function updateStatusFlow($currentStatus, $newStatus): void {
+        // $allowedStatuses = ['pending', 'active', 'finished'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $enrollmentID = intval($_POST['enrollmentID'] ?? 0);
+            $currentStatus = trim($_POST['currentStatus'] ?? '');
+            
+            if ($enrollmentID <= 0 || empty($currentStatus)) {
+                flash('Update', 'Missing enrollment data.');
+                redirect('/CISC3003-ProjectAssignment/views/manager/enrollments.php');
+            }
+            
+            // 根据当前状态决定新的状态
+            if ($currentStatus === 'pending' && $newStatus === 'finished') {
+                flash('Update', 'Cannot update status from the current state.');
+                redirect('/CISC3003-ProjectAssignment/views/manager/enrollments.php');
+            }
+            
+            if ($this->enrollmentModel->updateStatus($enrollmentID, $newStatus)) {
+                flash('Update', "Enrollment status updated to {$newStatus}.");
+            } else {
+                flash('Update', 'Status update failed.');
+            }
+            redirect('/CISC3003-ProjectAssignment/views/manager/enrollments.php');
+        } else {
+            flash('Error', 'Unauthorized request method.');
+            redirect('/CISC3003-ProjectAssignment/views/manager/enrollments.php');
+        }
     }
 }
 
