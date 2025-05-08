@@ -65,11 +65,16 @@ class User
             return false;
         }
 
-        if (password_verify($pwd, $row->userPwd)) {
-            return $row;
-        } elseif ($pwd == $row->userPwd) {
+        if ($pwd == $row->userPwd) {
             return $row;
         }
+
+        // 验证密码 (使用password_verify)
+        if (password_verify($pwd, $row->userPwd)) {
+            return $row;
+        }
+
+        
 
         return false;
     }

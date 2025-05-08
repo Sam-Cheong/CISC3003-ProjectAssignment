@@ -5,10 +5,12 @@ require_once __DIR__ . '/../helpers/session_helper.php';
 class Courses
 {
     private $courseModel;
+    private $enrollmentModel;
 
     public function __construct()
     {
         $this->courseModel = new Course();
+        $this->enrollmentModel = new Enrollment();
         $this->checkAuth(); // Ensure only managers can access
     }
 
@@ -117,6 +119,31 @@ class Courses
 
         redirect('../views/manager/index.php');
     }
+
+    /**
+     * 获取当前用户的课程（报名的课程详情）。
+     *
+     * @param int $userID 当前用户ID
+     * @return array 返回包含课程详情的数组
+     */
+    public function showSelfCourses(int $userID): array {
+        // 从 Enrollment 模型中获取报名记录，该方法已联结 courses 表返回课程详情
+        $enrollments = $this->enrollmentModel->getEnrollmentsByUser($userID);
+        $courses = [];
+
+        // 可选：去重处理，避免同一课程重复出现
+        foreach ($enrollments as $enrollment) {
+            $courses[] = [
+                'course_id'   => $enrollment->course_id,
+                'course_code' => $enrollment->course_code,
+                'course_name' => $enrollment->course_name,
+                'teacher'     => $enrollment->teacher,
+                'schedule'    => $enrollment->schedule,
+                // 如果需要还可以添加其他字段，如 description（如果有）
+            ];
+        }
+        return $courses;
+    }
 }
 
 // Initialize the controller
@@ -136,6 +163,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         default:
             redirect('../views/manager/index.php');
     }
-} else {
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['action']) && $_GET['action'] === 'showSelfCourses') {
+        // 获取当前用户ID
+        $userID = $_SESSION['userID'] ?? 0;
+        // 调用 showSelfCourses() 方法
+        $courses = $init->showSelfCourses($userID);
+        // 将结果传递到一个视图页面展示
+        require_once __DIR__ . '/../views/manager/self_courses.php';
+        exit();
+    }
+}
+else {
     $init->index();
 }

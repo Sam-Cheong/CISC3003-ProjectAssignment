@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 :root {
     /* Background Color */
@@ -25,7 +25,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Sansation', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 body {
@@ -341,6 +341,7 @@ main {
     bottom: 0.4em;
     width: 8.25em;
     height: 2.5em;
+    /* background-color: #212121; */
     background: linear-gradient(90deg, #578FCA, #212121);
     border-radius: 0.2em;
     font-size: 1.5em;
@@ -350,12 +351,13 @@ main {
 }
 
 .btn-3d span:hover {
+    transition: all 0.5s;
     transform: translate(0, 0.4em);
     box-shadow: 0 0 0 0 #fff;
 }
 
 .btn-3d span:not(hover) {
-    transition: all 0.5s;
+    transition: all 1s;
 }
 
 #hero .hero-container .hero-right img {
@@ -376,70 +378,6 @@ main {
     /* box-shadow: 20px 20px 40px #BEBEBE, -20px -20px 20px #FFFFFF; */
     padding: 20px;
     transition: 0.3s;
-}
-
-/* All Courses Page */
-
-#courses h1 {
-    margin-bottom: 40px;
-}
-.course-container {
-    display: grid;
-    max-width: 1200px;
-    grid-template-columns: repeat(5, 1fr);
-    grid-column-gap: 40px;
-    grid-row-gap: 40px;
-    margin: 0 auto;
-}
-
-.course-card {
-    min-height: 200px;
-    color: var(--primary-text-color);
-    background-color: var(--primary-bg-color);
-    padding: 20px;
-    border: 2px solid #2973B2;
-    border-radius: 20px;
-    box-shadow: var(--form-shadow);
-    transition: all 0.3s ease;
-}
-
-.course-card p {
-    margin-bottom: 15px;
-}
-
-p.course-name {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.course-code {
-    opacity: 0.7;
-}
-
-.course-btn {
-    display: flex;
-    width: fit-content;
-    padding: 10px 15px;
-    border: 2px solid #2973B2;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.course-btn:hover {
-    background-color: #2973B2;
-    transition: var(--btn-hover);
-}
-
-.course-btn a {
-    color: var(--primary-text-color);
-    font-weight: 500;
-    opacity: 0.7;
-}
-
-.course-btn:hover a {
-    opacity: 1;
-    color: #FFFFFF;
 }
 
 aside {
@@ -498,8 +436,7 @@ aside {
 }
 
 main#manager-dashboard,
-main#add-course,
-main#edit-course {
+main#add-course {
     position: absolute;
     right: 0;
     width: calc(100% - 300px);
@@ -507,6 +444,9 @@ main#edit-course {
 
 .manage-header {
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .btn a {
@@ -575,6 +515,19 @@ main#edit-course {
     gap: 10px;
 }
 
+.view-course-btn {
+    background-color: #3f9859;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.view-course-btn:hover {
+    background-color: #327647;
+}
+
 .edit-course-btn {
     background-color: #0d6efd;
     color: white;
@@ -604,28 +557,32 @@ main#edit-course {
     background-color: #c82333;
 }
 
-main#add-course h1,
-main#edit-course h1 {
+/* Add Course Form */
+main#add-course {
+    padding: 20px;
+}
+
+main#add-course h1 {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
     color: var(--primary-text-color);
 }
 
-.course-form {
+.add-course-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
 }
 
-.course-form .form-group {
+.add-course-form .form-group {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.course-form .form-label {
+.add-course-form .form-label {
     position: relative;
     left: 0;
     font-size: 18px;
@@ -635,7 +592,7 @@ main#edit-course h1 {
     cursor: pointer; /* Ensure labels are clickable */
 }
 
-.course-form .form-input {
+.add-course-form .form-input {
     padding: 10px;
     font-size: 18px;
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -644,16 +601,16 @@ main#edit-course h1 {
     transition: border-color 0.3s ease;
 }
 
-.course-form .form-input:focus {
+.add-course-form .form-input:focus {
     border-color: var(--btn-color);
 }
 
-.course-form textarea.form-input {
+.add-course-form textarea.form-input {
     resize: none;
     min-height: 100px;
 }
 
-.course-form .form-btn {
+.add-course-form .form-btn {
     width: fit-content;
     padding: 10px 20px;
     font-size: 1rem;
@@ -665,7 +622,7 @@ main#edit-course h1 {
     transition: background-color 0.3s ease;
 }
 
-.course-form .form-btn:hover {
+.add-course-form .form-btn:hover {
     background-color: #578FCA;
 }
 
@@ -719,6 +676,15 @@ main#edit-course h1 {
     transition: var(--btn-hover);
 }
 
+.finish-status-btn {
+    width: fit-content;
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: var(--btn-hover);
+}
+
 .download-enrollments-btn:hover {
     background-color: #578FCA;
 }
@@ -735,15 +701,15 @@ td.status-td {
 }
 
 td.pending {
-    background-color: #FFA500;  /* 橙色 */
+    background-color: #0d6efd;  
 }
 
 td.active {
-    background-color: #32CD32;  /* 酸橙绿 */
+    background-color: #dc3545;  
 }
 
 td.finished {
-    background-color: #A9A9A9;  /* 深灰 */
+    background-color: #A9A9A9; 
 }
 
 /* .unenroll-btn {
@@ -793,3 +759,21 @@ td.finished {
         flex-direction: column;
     }
 }
+
+/* <!-- filepath: c:\xampp\htdocs\CISC3003-ProjectAssignment\views\course\index.php -->
+<div class="course-card">
+    <div class="course-code"><?= htmlspecialchars($course->course_code) ?></div>
+    <h3 class="course-name"><?= htmlspecialchars($course->course_name) ?></h3>
+    <div class="course-teacher">
+        <i class="ri-user-line"></i>
+        <?= htmlspecialchars($course->teacher) ?>
+    </div>
+    <div class="course-schedule">
+        <i class="ri-time-line"></i>
+        <?= htmlspecialchars($course->schedule) ?>
+    </div>
+    <div class="course-btns">
+        <a href="/CISC3003-ProjectAssignment/views/course/detail.php?id=<?= htmlspecialchars($course->course_id); ?>" class="detail-btn">View Details</a>
+    </div>
+</div> 
+*/

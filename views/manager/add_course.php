@@ -24,7 +24,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
 <main id="add-course">
     <h1>Add New Course</h1>
-    <form method="post" action="../../controllers/Courses.php" class="course-form">
+    <form method="post" action="../../controllers/Courses.php" class="add-course-form">
         <input type="hidden" name="action" value="create">
         <div class="form-group">
             <label for="course_code" class="form-label">Course Code</label>

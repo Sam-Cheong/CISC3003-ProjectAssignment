@@ -11,6 +11,10 @@ if($_SESSION['roleID'] === 2) {
     require_once __DIR__ . '/../../controllers/Enrollments_users.php';
     $enrollmentscontroller = new Enrollments();
     $enrollments = $enrollmentscontroller->showSelfEnrollments();
+
+    require_once __DIR__ . '/../../controllers/Courses.php';
+    $coursescontroller = new Courses();
+    $userCourses = $coursescontroller->showSelfCourses($_SESSION['userID']);
 }
 
 require_once '../layouts/header.php';
@@ -39,7 +43,10 @@ require_once '../layouts/header.php';
                                     <i class="ri-time-line"></i>
                                     <?= htmlspecialchars($course->schedule) ?>
                                 </div>
-                            </div>
+                                <div class="course-btns">
+                                    <a href="/CISC3003-ProjectAssignment/views/course/detail.php?id=<?= htmlspecialchars($course->course_id); ?>" class="detail-btn">View Details</a>
+                                </div>
+                            </div> 
                         <?php endforeach; ?>
                     </div>
                 <?php else : ?>
