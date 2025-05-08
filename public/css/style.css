@@ -721,6 +721,15 @@ main#edit-course h1 {
     transition: var(--btn-hover);
 }
 
+.finish-status-btn {
+    width: fit-content;
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: var(--btn-hover);
+}
+
 .download-enrollments-btn:hover {
     background-color: #578FCA;
 }
@@ -737,15 +746,15 @@ td.status-td {
 }
 
 td.pending {
-    background-color: #FFA500;  /* 橙色 */
+    background-color: #0d6efd;  
 }
 
 td.active {
-    background-color: #32CD32;  /* 酸橙绿 */
+    background-color: #dc3545;  
 }
 
 td.finished {
-    background-color: #A9A9A9;  /* 深灰 */
+    background-color: #A9A9A9; 
 }
 
 /* .unenroll-btn {

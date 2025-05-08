@@ -108,6 +108,13 @@ class Course {
         return $this->db->single(); // Returns object or null
     }
 
+    public function getCourseIdByCode(string $courseCode): ?int {
+        $this->db->query('SELECT course_id FROM courses WHERE course_code = :code LIMIT 1');
+        $this->db->bind(':code', $courseCode);
+        $result = $this->db->single();
+        return $result ? (int)$result->course_id : null;
+    }
+
     /**
      * Updates an existing course, including description.
      * Returns true on success, false on failure.

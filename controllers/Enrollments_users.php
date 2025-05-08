@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../helpers/session_helper.php';
 require_once __DIR__ . '/../models/Enrollment.php';
+require_once __DIR__ . '/../models/Course.php';
 const permiteeID = 3;
 
 //僅允許已登入使用者操作
@@ -24,10 +25,12 @@ if (!isset($_SESSION['userID'])) {
 
 class Enrollments { 
     private $enrollmentModel;
+    private $courseModel;
 
     public function __construct()
     {
         $this->enrollmentModel = new Enrollment();
+        $this->courseModel = new Course();
     }
 
     private function isComplete(array $enrollmentdata): bool {
@@ -37,10 +40,11 @@ class Enrollments {
     private function combineEnrollmentData(){
         //需確保function不會被call第二次才能使用這個method
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $enrollmentdata = [
-                'userID' => $_SESSION['user_id'],
+            $enrollmentdata = array(
+                'userID' => $_SESSION['userID'],
                 'course_code' => trim($_POST['course_code']),
-            ];
+                'course_id' => $this->courseModel->getCourseIdByCode(trim($_POST['course_code'])),
+            );
             return $enrollmentdata;
         }else{
             $enrollmentdata = null;
@@ -53,10 +57,10 @@ class Enrollments {
         if ($this->isComplete($enrollmentdata)) {
             if ($this->enrollmentModel->createEnrollment($enrollmentdata)) {
                 flash('Enroll', 'Enrolled successfully.');
-                redirect('/CISC3003-ProjectAssignment/views/profile.php');
+                redirect('/CISC3003-ProjectAssignment/views/user/profile.php');
             } else {
                 flash('Enroll', 'Course already enrolled.');
-                redirect('/CISC3003-ProjectAssignment/views/courses.php');
+                redirect('/CISC3003-ProjectAssignment/views/course/detail.php?id=' . $enrollmentdata['course_id']);
             }
         } else {
             flash('Enroll', 'Enrollment failed.');

@@ -12,19 +12,19 @@ class Enrollment {
     public function __destruct() {
         $this->db = null;
     }
-    
+
     public function isExist(array $enrollmentdata){
-        if($enrollmentdata['enrollmentID'] != null) {
+        if(isset($enrollmentdata['enrollmentID'])) {
             // select by enrollmentID
             $this->db->query("SELECT enrollmentID FROM enrollments WHERE enrollmentID = :enrollmentID");
             $this->db->bind(':enrollmentID', $enrollmentdata['enrollmentID']);
             $result = $this->db->single();
             return $result;
-        }elseif($enrollmentdata['userID'] != null && $enrollmentdata['courseID'] != null) {
+        }elseif($enrollmentdata['userID'] != null && $enrollmentdata['course_id'] != null) {
             // select by userID and courseID
-            $this->db->query("SELECT enrollmentID FROM enrollments WHERE userID = :userID AND courseID = :courseID");
+            $this->db->query("SELECT enrollmentID FROM enrollments WHERE userID = :userID AND course_id = :course_id");
             $this->db->bind(':userID', $enrollmentdata['userID']);
-            $this->db->bind(':courseID', $enrollmentdata['courseID']);
+            $this->db->bind(':course_id', $enrollmentdata['course_id']);
             $result = $this->db->single();
             return $result;
         }else {return null;}
@@ -49,7 +49,7 @@ class Enrollment {
         $sql = 'INSERT INTO enrollments (userID, course_id) VALUES (:uid, :cid)';
         $this->db->query($sql);
         $this->db->bind(':uid', $enrollmentdata['userID']);
-        $this->db->bind(':cid', $enrollmentdata['courseID']);
+        $this->db->bind(':cid', $enrollmentdata['course_id']);
         return $this->db->execute();
     }
 

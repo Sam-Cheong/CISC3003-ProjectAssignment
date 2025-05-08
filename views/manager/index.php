@@ -54,8 +54,16 @@ require_once __DIR__ . '\..\layouts\header.php';
                         <td><?= htmlspecialchars($course->schedule) ?></td>
                         <td>
                             <div class="action-buttons">
-                                <div class="view-course-btn btn"><a href="/CISC3003-ProjectAssignment/views/course/detail.php?course_id=<?= $course->course_id ?>" class="btn-view">View</a></div>
-                                <div class="edit-course-btn btn"><a href="/CISC3003-ProjectAssignment/views/manager/edit_course.php?course_id=<?= $course->course_id ?>" class="btn-edit">Edit</a></div>
+                                <div class="view-course-btn btn">
+                                    <a href="/CISC3003-ProjectAssignment/views/course/detail.php?id=<?= $course->course_id ?>" class="btn-view">
+                                        View
+                                    </a>
+                                </div>
+                                <div class="edit-course-btn btn">
+                                    <a href="/CISC3003-ProjectAssignment/views/manager/edit_course.php?course_id=<?= $course->course_id ?>" class="btn-edit">
+                                        Edit
+                                    </a>
+                                </div>
                                 <form method="post" action="../../controllers/Courses.php" style="display:inline;">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="course_id" value="<?= $course->course_id ?>">

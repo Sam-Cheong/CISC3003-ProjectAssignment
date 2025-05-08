@@ -46,7 +46,10 @@ require_once '../layouts/header.php';
                                     <i class="ri-time-line"></i>
                                     <?= htmlspecialchars($course->schedule) ?>
                                 </div>
-                            </div>
+                                <div class="course-btns">
+                                    <a href="/CISC3003-ProjectAssignment/views/course/detail.php?id=<?= htmlspecialchars($course->course_id); ?>" class="detail-btn">View Details</a>
+                                </div>
+                            </div> 
                         <?php endforeach; ?>
                     </div>
                 <?php else : ?>
