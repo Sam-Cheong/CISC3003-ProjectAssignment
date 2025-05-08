@@ -651,6 +651,19 @@ main#add-course h1 {
     border-bottom-right-radius: 10px;
 }
 
+.download-enrollments-btn {
+    width: fit-content;
+    background-color: var(--btn-color);
+    color: var(--second-text-color);
+    padding: 12px 15px;
+    border-radius: 10px;
+    transition: var(--btn-hover);
+}
+
+.download-enrollments-btn:hover {
+    background-color: #578FCA;
+}
+
 td.status-td {
     color: white;
     padding: 5px 10px;

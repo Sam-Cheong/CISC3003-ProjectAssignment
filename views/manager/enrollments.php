@@ -30,7 +30,11 @@ require_once __DIR__ . '\..\layouts\header.php';
 
 <main id="manager-dashboard">
     <div class="manage-header">
-        <h2>Enrollments</h2>
+        <div class="download-enrollments-btn btn">
+            <a href="/CISC3003-ProjectAssignment/views/manager/export_enrollments_csv.php" class="btn-submit">
+                <i class="ri-printer-fill"></i> Download CSV
+            </a>
+        </div>
     </div>
     <table class="enrollments-table">
         <thead>
