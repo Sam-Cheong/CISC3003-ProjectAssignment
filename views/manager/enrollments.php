@@ -65,7 +65,7 @@ require_once __DIR__ . '\..\layouts\header.php';
                                     <option value="active" <?= $enrollment->status === 'active' ? 'selected' : '' ?>>Active</option>
                                     <option value="finished" <?= $enrollment->status === 'finished' ? 'selected' : '' ?>>Finished</option>
                                 </select>
-                                <button type="submit" class="form-btn">Update</button>
+                                <button type="submit" class="form-btn" onclick="return confirm('Confirm update the status?');">Update</button>
                             </form>
                         </td>
                     </tr>

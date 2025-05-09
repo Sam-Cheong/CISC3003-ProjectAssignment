@@ -67,7 +67,7 @@ require_once __DIR__ . '\..\layouts\header.php';
                                 <form method="post" action="../../controllers/Courses.php" style="display:inline;">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="hidden" name="course_id" value="<?= $course->course_id ?>">
-                                    <button type="submit" class="delete-course-btn" onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button type="submit" class="delete-course-btn" onclick="return confirm('Are you sure to delete the course?')">Delete</button>
                                 </form>
                             </div>
                         </td>

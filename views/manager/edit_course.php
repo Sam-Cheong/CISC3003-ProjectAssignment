@@ -59,7 +59,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <label for="description" class="form-label">Description</label>
             <textarea id="description" name="description" class="form-input"><?= htmlspecialchars($course->description) ?></textarea>
         </div>
-        <button type="submit" class="form-btn">Update Course</button>
+        <button type="submit" class="form-btn" onclick="return confirm('Are you sure to update this course?');">Update Course</button>
     </form>
 </main>
 

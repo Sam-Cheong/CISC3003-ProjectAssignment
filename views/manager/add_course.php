@@ -46,7 +46,7 @@ require_once __DIR__ . '/../layouts/header.php';
             <label for="description" class="form-label">Description</label>
             <textarea id="description" name="description" class="form-input" placeholder="Enter course description"></textarea>
         </div>
-        <button type="submit" class="form-btn">Add Course</button>
+        <button type="submit" class="form-btn" onclick="return confirm('Are you sure to add this course?');">Add Course</button>
     </form>
 </main>
 
