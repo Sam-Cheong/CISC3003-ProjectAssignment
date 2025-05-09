@@ -10,8 +10,12 @@ To use the system, you need to pay attention to the instructions below:
         1. DB_HOST = YOUR_DATABASE_HOST
         2. DB_USER = YOUR_DATABASE_USERNAME
         3. DB_PASSWORD = YOUR_DATABASE_PASSWORD
-        4. DB_NAME = YOUR_DATABASE_NAME (Not the same as DB_USER)
-        5. DB_CHARSET = utf8mb4 (Requirement)
+        4. DB_NAME = YOUR_DATABASE_NAME
+        5. DB_CHARSET = utf8mb4
+        6. MAIL_HOST = smtp.google.com (Send to Gmail Inbox)
+        7. MAIL_USER = YOUR_GMAIL_ACCOUNT
+        8. MAIL_PASS = YOUR_GMAIL_APPLICATION_PASSWORD (Not the Gmail password that you login)
+        9. MAIL_PORT = 465 (For the security)
     - Further sensitive variables will be added in .env
 
 2. Deploy the system to your localhost
@@ -24,4 +28,4 @@ To use the system, you need to pay attention to the instructions below:
     - Create new database on the left side bar, the database name is same with DB_NAME in .env
     - Copy all the SQL statements in schema.sql and paste to the SQL options on the navigate bar on the top
     - Execute the SQL statements
-    - Finally, Start using the system from http://localhost/NAME_OF_DIRECTORY
+    - Finally, Start using the system from http://localhost/CICS3003-ProjectAssignment/
