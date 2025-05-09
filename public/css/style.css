@@ -144,11 +144,15 @@ a {
     background-color: #578FCA;
 }
 
+.toggle-menu {
+    display: none;
+}
+
 main {
     position: relative;
     top: 80px;
     padding: 40px;
-    min-height: calc(100dvh - 80px);
+    min-height: calc(100dvh - 160px);
 }
 
 #login,
@@ -502,8 +506,9 @@ aside {
 main#manager-dashboard,
 main#add-course,
 main#edit-course {
-    position: absolute;
-    right: 0;
+    position: relative;
+    top: 80px;
+    left: 300px;
     width: calc(100% - 300px);
 }
 
@@ -919,24 +924,27 @@ main#edit-course h1 {
     background: #c82333;
 }
 
-@media screen and (max-width: 1200px) {}
+footer {
+    position: relative;
+    top: 80px;
+    height: 80px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2973B2;
+    color: var(--second-text-color);
+}
 
 @media screen and (max-width: 768px) {
     header {
         flex-wrap: wrap;
     }
 
-    .nav-logo {
-        margin-bottom: 10px;
-    }
-
     .nav-search {
         width: 100%;
+        display: none;
         margin: 10px 0;
-    }
-
-    .nav-search input {
-        padding: 10px 35px 10px 15px;
     }
 
     .nav-search i {
@@ -948,5 +956,29 @@ main#edit-course h1 {
         flex: 1 0 100%;
         text-align: center;
         flex-direction: column;
+    }
+
+    .toggle-menu {
+        display: block;
+        cursor: pointer;
+    }
+
+    .toggle-menu span {
+        display: inline-block;
+        width: 25px;
+        height: 3px;
+        margin-bottom: 5px;
+        background-color: var(--primary-text-color);
+        color: var(--primary-text-color);
+    }
+
+    #hero .hero-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hero-left,
+    .hero-right {
+        max-width: 100%;
     }
 }

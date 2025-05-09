@@ -35,3 +35,5 @@ $courses = $courseModel->getAllCourses();  // 获取所有课程
         <?php endif; ?>
     </section>
 </main>
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>

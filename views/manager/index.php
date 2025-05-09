@@ -81,3 +81,5 @@ require_once __DIR__ . '\..\layouts\header.php';
         </tbody>
     </table>
 </main>
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>

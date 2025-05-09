@@ -19,33 +19,5 @@ include __DIR__ . '/views/layouts/header.php';
                 </div>
             </div>
         </section>
-        <section id="popular">
-            <div class="popular-container">
-                <h1>Popular Courses</h1>
-                <div class="popular-courses">
-                    <div class="popular-course">
-                        <h2>Course Name</h2>
-                        <h3>Course Code</h3>
-                        <p>Time</p>
-                    </div>
-                    <div class="popular-course">
-                        <h2>Course Name</h2>
-                        <h3>Course Code</h3>
-                        <p>Time</p>
-                    </div>
-                    <div class="popular-course">
-                        <h2>Course Name</h2>
-                        <h3>Course Code</h3>
-                        <p>Time</p>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <section>
-
-        </section>
     </main>
-</body>
-
-</html>
+<?php require_once __DIR__ . '/views/layouts/footer.php'; ?>

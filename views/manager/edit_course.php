@@ -62,3 +62,5 @@ require_once __DIR__ . '/../layouts/header.php';
         <button type="submit" class="form-btn">Update Course</button>
     </form>
 </main>
+
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>
