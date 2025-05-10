@@ -44,14 +44,17 @@ require_once __DIR__ . '\..\..\helpers\session_helper.php';
                 <li><a href="/CISC3003-ProjectAssignment/views/user/login.php" class="nav-link">Login</a></li>
             <?php endif; ?>
         </ul>
+        
         <?php if (!isset($_SESSION['userID'])): ?>
         <div class="nav-btns">
             <a href="/CISC3003-ProjectAssignment/views/user/register.php" class="nav-btn">Sign Up</a>
         </div>
         <?php endif; ?>
+
         <div class="toggle-menu">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
     </header>
+    <script src="/CISC3003-ProjectAssignment/public/js/main.js"></script>

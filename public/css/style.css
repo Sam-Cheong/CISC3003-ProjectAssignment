@@ -146,6 +146,7 @@ a {
 
 .toggle-menu {
     display: none;
+    flex-direction: column;
 }
 
 main {
@@ -697,6 +698,7 @@ main#edit-course h1 {
 
 .enrollments-table th,
 .enrollments-table td {
+    width:fit-content;
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -795,6 +797,7 @@ main#edit-course h1 {
 /* table wrapper to allow horizontal scroll on small screens */
 .profile-page .records .table-wrapper {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin-top: 1rem;
 }
 
@@ -926,13 +929,23 @@ main#edit-course h1 {
 
 footer {
     position: relative;
+    width: 100%;
     top: 80px;
-    height: 80px;
+    height: fit-content;
+    min-height: 80px;
+    padding: 10px;
+    gap: 10px;
     text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #2973B2;
+    color: var(--second-text-color);
+}
+
+footer .footer-links a {
+    padding: 10px;
     color: var(--second-text-color);
 }
 
@@ -953,13 +966,28 @@ footer {
     }
 
     .nav-links {
-        flex: 1 0 100%;
-        text-align: center;
+        display: flex;
         flex-direction: column;
+        width: 100%;
+        height: fit-content;
+        background-color: var(--primary-bg-color);
+        position: absolute;
+        top: 80px;
+        left: 0;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+    }
+
+    .nav-links.active {
+        max-height: 400px; /* 根据实际内容高度调整 */
+        opacity: 1;
+        padding-bottom: 15px;
     }
 
     .toggle-menu {
-        display: block;
+        display: flex;
         cursor: pointer;
     }
 
@@ -972,6 +1000,17 @@ footer {
         color: var(--primary-text-color);
     }
 
+    .blur-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(5px);
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 50;
+    }
+
     #hero .hero-container {
         display: flex;
         flex-direction: column;
@@ -980,5 +1019,69 @@ footer {
     .hero-left,
     .hero-right {
         max-width: 100%;
+    }
+
+    .hero-left h1 {
+        font-size: 3rem;
+    }
+
+    .course-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .course-card {
+        min-height: 200px;
+        color: var(--primary-text-color);
+        background-color: var(--primary-bg-color);
+        padding: 20px;
+        border: 2px solid #2973B2;
+        border-radius: 20px;
+        box-shadow: var(--form-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .enrollments-table tbody td{
+        width: fit-content;
+        white-space: nowrap !important;
+    }
+
+    aside {
+        position: relative;      /* 取消 fixed 定位 */
+        width: 100%;
+        top: 80px;
+        height: auto;
+        padding: 10px 20px;      /* 根据需要调整内边距 */
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sidebar h2 {
+        display: none;
+    }
+
+    .side-links {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .side-links a {
+        width: auto;
+        padding: 0;
+    }
+
+    main#manager-dashboard,
+    main#add-course,
+    main#edit-course {
+        position: relative;
+        top: 80px;
+        left: 0;
+        width: calc(100% - 300px);
     }
 }

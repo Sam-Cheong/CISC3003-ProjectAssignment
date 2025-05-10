@@ -19,7 +19,7 @@ require_once __DIR__ . '/../layouts/header.php';
 <main class="profile-page">
     <section class="profile-info">
         <h2>Profile Information</h2>
-        <p><strong>Name: </strong><?= htmlspecialchars($_SESSION['username']) ?></p>
+        <p><strong>Name: </strong><?= htmlspecialchars(ucwords($_SESSION['username'])) ?></p>
         <p><strong>Email:</strong> <?= htmlspecialchars($_SESSION['email']) ?></p>
     </section>
 
@@ -31,8 +31,7 @@ require_once __DIR__ . '/../layouts/header.php';
 
         <?php if (!empty($records) && $_SESSION['roleID'] == 3): ?>
             <div class="table-wrapper">
-                
-                <table>
+                <table class="enrollment-table">
                     <thead>
                         <tr>
                             <th>Course Name</th>
