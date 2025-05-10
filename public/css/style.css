@@ -1040,9 +1040,25 @@ footer .footer-links a {
         transition: all 0.3s ease;
     }
 
-    .enrollments-table tbody td{
+    .enrollments-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: var(--primary-bg-color);
+        border-radius: 10px;
+        overflow: auto;
+        box-shadow: var(--form-shadow);
+    }
+
+    .enrollments-table td{
         width: fit-content;
-        white-space: nowrap !important;
+        white-space: nowrap;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .enrollments-table th{
+        width: 100%;
+        border-bottom: 1px solid #ddd;
     }
 
     aside {
