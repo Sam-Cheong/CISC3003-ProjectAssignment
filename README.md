@@ -24,7 +24,7 @@ To use the system, you need to pay attention to the instructions below:
     - After installation, move the whole project directory to "path/to/xampp/htdocs/" which may have something there already, but just ignore those files.
     - Open XAMPP you can find/search in the start menu (Windows)
     - Start the Apache Server and MySQL Server
-    - Open schema.sql in the root of directory
+    - Open **[schema.sql](./schema.sql)** in the root of the directory
     - Visit the [MySQL Database Management Dashboard](http://localhost/phpmyadmin/)
     - Create new database on the left side bar, the database name is same with DB_NAME in .env
     - Copy all the SQL statements in schema.sql and paste to the SQL options on the navigate bar on the top

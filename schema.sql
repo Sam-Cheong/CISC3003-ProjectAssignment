@@ -59,30 +59,41 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 
--- Test Case
--- INSERT INTO users (userName, userEmail, userPwd, roleID) 
---  VALUES ('manager', 'manager@example.com', '123456', 2);
--- 插入管理员用户（roleID = 2），密码为 "managerpass"
--- INSERT INTO users (userName, userEmail, userPwd, roleID)
--- VALUES ('manager', 'manager@example.com', '$2y$10$wHST7Q7V/vR7sT.lQ.nLUu7A.TF6Ea5je0Zr2fN3vApR2t1mv6Bxu', 2);
+-- 插入角色
+INSERT INTO roles (roleName) VALUES 
+('Admin'), 
+('Manager'), 
+('User');
 
--- -- 插入普通用户 Alice（roleID = 3），密码为 "password123"
--- INSERT INTO users (userName, userEmail, userPwd, roleID)
--- VALUES ('Alice', 'alice@example.com', '$2y$10$wJST7Q7V/vR7sT.lQ.nLUu7A.TF6Ea5je0Zr2fN3vApR2t1mv6Bxu', 3);
+-- 插入用户（密码已加密）
+-- 明文密码：adminpass, managerpass, userpass1, userpass2
+INSERT INTO users (userName, userEmail, userPwd, roleID) VALUES
+('admin', 'admin@example.com', '$2y$10$eImiTXuWVxfM37uY4JANjQePz8F9jz8F9jz8F9jz8F9jz8F9jz8F9jz', 1), -- adminpass
+('manager', 'manager@example.com', '$2y$10$wHST7Q7V/vR7sT.lQ.nLUu7A.TF6Ea5je0Zr2fN3vApR2t1mv6Bxu', 2), -- managerpass
+('Alice', 'alice@example.com', '$2y$10$wJST7Q7V/vR7sT.lQ.nLUu7A.TF6Ea5je0Zr2fN3vApR2t1mv6Bxu', 3), -- userpass1
+('Bob', 'bob@example.com', '$2y$10$3LZk7cRFS0vbqC3L7BAnPeKCqRhwLk1yuuPrD5mBjEXwTknDxOj1a', 3); -- userpass2
 
--- -- 插入普通用户 Bob（roleID = 3），密码为 "mypassword"
--- INSERT INTO users (userName, userEmail, userPwd, roleID)
--- VALUES ('Bob', 'bob@example.com', '$2y$10$3LZk7cRFS0vbqC3L7BAnPeKCqRhwLk1yuuPrD5mBjEXwTknDxOj1a', 3);
+-- 插入课程
+INSERT INTO courses (course_code, course_name, teacher, schedule) VALUES
+('MATH101', 'Mathematics 101', 'Dr. Smith', 'Mon-Wed-Fri 10:00-11:00'),
+('ENG202', 'English Literature', 'Prof. Johnson', 'Tue-Thu 14:00-15:30'),
+('HIST303', 'World History', 'Dr. Brown', 'Mon-Wed 13:00-14:30'),
+('ART404', 'Introduction to Art', 'Ms. Davis', 'Fri 09:00-12:00');
 
+-- 插入报名记录
+-- 用户 1 报名课程 1 和 2
+INSERT INTO enrollments (userID, course_id, status) VALUES
+(1, 1, 'active'),
+(1, 2, 'pending');
 
--- -- 示例 1：用户 1（manager）报名课程 2 (Math)，状态设置为 active
--- INSERT INTO enrollments (userID, course_id, status) 
--- VALUES (1, 2, 'active');
+-- 用户 2 报名课程 3
+INSERT INTO enrollments (userID, course_id, status) VALUES
+(2, 3, 'finished');
 
--- -- 示例 3：用户 3（bob）报名课程 4 (History)，状态设置为 finished
--- INSERT INTO enrollments (userID, course_id, status)
--- VALUES (3, 4, 'finished');
+-- 用户 3 报名课程 4
+INSERT INTO enrollments (userID, course_id, status) VALUES
+(3, 4, 'active');
 
--- -- 示例 5：用户 1（manager）报名课程 6 (Art)，使用默认的 pending 状态
--- INSERT INTO enrollments (userID, course_id)
--- VALUES (1, 6);
+-- 用户 4 报名课程 1
+INSERT INTO enrollments (userID, course_id, status) VALUES
+(4, 1, 'pending');
