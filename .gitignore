@@ -56,3 +56,4 @@ desktop.ini
 *.old
 *.zip
 *.tar.gz
+composer.json
